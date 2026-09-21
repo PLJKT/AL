@@ -408,6 +408,17 @@
   .ult-item.locked .ult-icon svg { width: 14px; height: 14px; stroke: #7A90B0; }
   .ult-name { color: var(--text); }
   .ult-lock { font-size: 0.72rem; color: var(--text-dim); margin-left: auto; }
+  .milestone-tag {
+    font-size: 0.62rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .tag-ult { background: rgba(255,215,0,0.2); color: #FFD700; }
+  .tag-equip { background: rgba(0,212,255,0.2); color: #00D4FF; }
+  .tag-title { background: rgba(167,139,250,0.2); color: #A78BFA; }
 
   /* ===== Responsive ===== */
   @media (max-width: 860px) {
@@ -489,20 +500,35 @@
       <div class="xp-bar"><div class="xp-fill" style="width:20%"></div></div>
       <div class="xp-text">总进度 20% · 再升2级积1分</div>
       <div class="ult-section">
-        <div class="ult-label">绝 招</div>
+        <div class="ult-label">成 长 里 程 碑</div>
         <div class="ult-item unlocked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></div>
           <span class="ult-name">黄金右脚射门</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">团队之光传球</span>
           <span class="ult-lock">Lv.4</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-equip">装备</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">光之足球</span>
+          <span class="ult-lock">Lv.5</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">圆月弯刀任意球</span>
           <span class="ult-lock">Lv.6</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-title">称号</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">足球之星</span>
+          <span class="ult-lock">Lv.10</span>
         </div>
       </div>
     </div>
@@ -518,20 +544,35 @@
       <div class="xp-bar"><div class="xp-fill" style="width:20%"></div></div>
       <div class="xp-text">总进度 20% · 再升2级积1分</div>
       <div class="ult-section">
-        <div class="ult-label">绝 招</div>
+        <div class="ult-label">成 长 里 程 碑</div>
         <div class="ult-item unlocked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
           <span class="ult-name">旋律之光演奏</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">节奏大师共鸣</span>
           <span class="ult-lock">Lv.4</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-equip">装备</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">星光琴键</span>
+          <span class="ult-lock">Lv.5</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">双手合璧琶音</span>
           <span class="ult-lock">Lv.6</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-title">称号</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">旋律大师</span>
+          <span class="ult-lock">Lv.10</span>
         </div>
       </div>
     </div>
@@ -547,20 +588,35 @@
       <div class="xp-bar"><div class="xp-fill" style="width:20%"></div></div>
       <div class="xp-text">总进度 20% · 再升2级积1分</div>
       <div class="ult-section">
-        <div class="ult-label">绝 招</div>
+        <div class="ult-label">成 长 里 程 碑</div>
         <div class="ult-item unlocked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div>
           <span class="ult-name">闪电运球</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">跳跃灌篮</span>
           <span class="ult-lock">Lv.4</span>
         </div>
         <div class="ult-item locked">
+          <span class="milestone-tag tag-equip">装备</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">雷霆战靴</span>
+          <span class="ult-lock">Lv.5</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-ult">绝招</span>
           <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           <span class="ult-name">神准三分球</span>
           <span class="ult-lock">Lv.6</span>
+        </div>
+        <div class="ult-item locked">
+          <span class="milestone-tag tag-title">称号</span>
+          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+          <span class="ult-name">篮球之魂</span>
+          <span class="ult-lock">Lv.10</span>
         </div>
       </div>
     </div>
