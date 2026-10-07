@@ -420,6 +420,28 @@
   .tag-equip { background: rgba(0,212,255,0.2); color: #00D4FF; }
   .tag-title { background: rgba(167,139,250,0.2); color: #A78BFA; }
 
+  /* ===== Subject Quest ===== */
+  .subj-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 18px;
+    border-top: 4px solid;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .subj-card:hover { transform: translateY(-4px); box-shadow: 0 0 24px rgba(255,215,0,0.12); }
+  .subj-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .subj-name { font-size: 1.05rem; font-weight: 700; }
+  .subj-pct { margin-left: auto; font-size: 1.3rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; }
+  .subj-status { font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
+  .subj-review { font-size: 0.85rem; color: #B8C8E0; margin-bottom: 10px; line-height: 1.7; }
+  .subj-path { border-top: 1px dashed rgba(255,255,255,0.12); padding-top: 8px; margin-bottom: 8px; }
+  .subj-path-title { font-size: 0.72rem; color: #00D4FF; letter-spacing: 1px; margin-bottom: 4px; }
+  .subj-path ul { list-style: none; padding: 0; margin: 0; }
+  .subj-path li { font-size: 0.8rem; color: #9FB4D4; padding: 2px 0 2px 14px; position: relative; }
+  .subj-path li::before { content: '\2022'; position: absolute; left: 0; color: #00D4FF; }
+  .subj-goal { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); border-radius: 8px; padding: 8px 10px; font-size: 0.8rem; color: #FFD700; line-height: 1.6; }
+
   /* ===== Responsive ===== */
   @media (max-width: 860px) {
     .dim-grid { grid-template-columns: repeat(2, 1fr); }
@@ -659,6 +681,171 @@
   <p class="panel-sub">科目更多了，AL 的光芒也更亮了。</p>
 
   <div class="dim-grid" id="dim-grid-primary"></div>
+
+  <section class="panel">
+    <h2 class="panel-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M8 12l3 3 5-6"/></svg>
+      学科修炼路线 · NEXT QUEST
+    </h2>
+    <p class="panel-sub">过去的分是荣誉，不是终点。下一段冒险，才是真正的开始——每一科都有下一关等你闯。</p>
+    <div class="skill-grid">
+
+      <div class="subj-card" style="border-top-color:#FFD700;">
+        <div class="subj-head">
+          <span class="subj-name">数学</span>
+          <span class="subj-status" style="color:#FFD700; border:1px solid rgba(255,215,0,0.4);">冲刺满级</span>
+          <span class="subj-pct" style="color:#FFD700;">98%</span>
+        </div>
+        <div class="subj-review">98 分很棒，但还差 2 分就满级了。那些错题不是失败，是还没被你打败的小怪兽——降服它们，你就能摸到满分。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每天 10 分钟口算计时挑战，像打 BOSS 一样限时通关</li>
+            <li>准备"怪兽本"：每订正一道错题 = 击败一只怪兽，攒 10 只召唤满分</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：下学年数学 ≥ 99%，达成解锁称号「数理大师」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#00E5FF;">
+        <div class="subj-head">
+          <span class="subj-name">科学</span>
+          <span class="subj-status" style="color:#00E5FF; border:1px solid rgba(0,229,255,0.4);">满级守护</span>
+          <span class="subj-pct" style="color:#00E5FF;">100%</span>
+        </div>
+        <div class="subj-review">连续满分很耀眼，但科学没有终点——课本上的知识，只有亲手做实验才会真正属于你。从"会答"到"会做"，是下一关。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每周 1 个家庭小实验（火山喷发、种子发芽、磁铁探秘）</li>
+            <li>准备"观察记录本"，把每次实验画下来、写一句发现</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：保持满分 + 完成 3 个家庭实验，解锁装备「科学之眼」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#5B8DEF;">
+        <div class="subj-head">
+          <span class="subj-name">英语</span>
+          <span class="subj-status" style="color:#5B8DEF; border:1px solid rgba(91,141,239,0.4);">稳定上升</span>
+          <span class="subj-pct" style="color:#5B8DEF;">96%</span>
+        </div>
+        <div class="subj-review">从幼儿园"多讲英语"的小提醒，到现在 96 分——你已经走得很远。但语言的战场没有尽头：敢开口、说流利，就是下一个等级。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每天 20 分钟英文绘本配音朗读，跟着音频大声读</li>
+            <li>课堂上主动举手用英语回答，每周至少 5 次</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：英语 ≥ 98% + 课堂发言打卡，解锁称号「英语小主播」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#E86A92;">
+        <div class="subj-head">
+          <span class="subj-name">普通话</span>
+          <span class="subj-status" style="color:#E86A92; border:1px solid rgba(232,106,146,0.4);">稳步高位</span>
+          <span class="subj-pct" style="color:#E86A92;">98%</span>
+        </div>
+        <div class="subj-review">98 分证明你能读、能写，但母语的下一关不是分数，是"讲得精彩"——让中文变得有故事、有温度、有感染力。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每天 15 分钟中文故事阅读，读给家人听</li>
+            <li>每周学讲 2 个新故事，讲完问家人"猜猜结局"</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：保持 ≥ 98% + 每周 2 个故事，解锁称号「故事大王」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#4ADE80;">
+        <div class="subj-head">
+          <span class="subj-name">印尼语</span>
+          <span class="subj-status" style="color:#4ADE80; border:1px solid rgba(74,222,128,0.4);">稳步提升</span>
+          <span class="subj-pct" style="color:#4ADE80;">89%</span>
+        </div>
+        <div class="subj-review">89 分说明基础已经打牢，而印尼语每天都在你身边——把课堂学到的词用进生活，进步会快得超乎想象。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每天 3 句印尼语日常对话：问候、吃饭、道谢</li>
+            <li>每周看 10 分钟印尼语动画片，跟着主角复读</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：印尼语 ≥ 92%，解锁称号「双语小达人」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#FF6B35;">
+        <div class="subj-head">
+          <span class="subj-name">体育</span>
+          <span class="subj-status" style="color:#FF6B35; border:1px solid rgba(255,107,53,0.4);">重点修炼</span>
+          <span class="subj-pct" style="color:#FF6B35;">81%</span>
+        </div>
+        <div class="subj-review">81 分是最需要追赶的一角，但别忘了——你从小就是精力充沛的小战士！身体是一切冒险的本钱，把运动变成每天的快乐任务。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每周 3 次户外运动：跳绳、踢球、拍球各 10 分钟</li>
+            <li>每天跳绳 100 下打卡，从"气喘"练到"轻松"</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：体育 ≥ 88%，解锁装备「疾风战靴」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#A78BFA;">
+        <div class="subj-head">
+          <span class="subj-name">数字素养</span>
+          <span class="subj-status" style="color:#A78BFA; border:1px solid rgba(167,139,250,0.4);">新星冲刺</span>
+          <span class="subj-pct" style="color:#A78BFA;">92%</span>
+        </div>
+        <div class="subj-review">首秀就拿到 92 分，说明你对数字世界天生敏感。但科技不是用来玩的，是用来"创造"的——学会驾驭它，而不是被它牵着走。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每周 1 次打字小游戏练习，10 分钟专注挑战</li>
+            <li>用绘图软件完成 1 幅作品，展示给家人</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：数字素养 ≥ 95%，解锁称号「科技小先锋」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#FF9A3D;">
+        <div class="subj-head">
+          <span class="subj-name">艺术设计</span>
+          <span class="subj-status" style="color:#FF9A3D; border:1px solid rgba(255,154,61,0.4);">探索进阶</span>
+          <span class="subj-pct" style="color:#FF9A3D;">86%</span>
+        </div>
+        <div class="subj-review">86 分不是终点，是画笔还在找自己的风格。你从小就有创造力，现在只需要多画、多观察——灵感会在纸上自己长大。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每周画 1 幅"我的一天"，把开心的事画下来</li>
+            <li>观察树叶、云朵、小动物，画成自然日记</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：艺术设计 ≥ 90%，解锁称号「创意小画家」</div>
+      </div>
+
+      <div class="subj-card" style="border-top-color:#F472B6;">
+        <div class="subj-head">
+          <span class="subj-name">音乐</span>
+          <span class="subj-status" style="color:#F472B6; border:1px solid rgba(244,114,182,0.4);">优雅进阶</span>
+          <span class="subj-pct" style="color:#F472B6;">91%</span>
+        </div>
+        <div class="subj-review">91 分很棒，音乐是你表达情绪的超能力。钢琴技能和课堂音乐可以互相成就——继续练琴，让旋律更有力量。</div>
+        <div class="subj-path">
+          <div class="subj-path-title">增 长 路 径</div>
+          <ul>
+            <li>每周完整练习 1 首钢琴曲（配合钢琴技能升级）</li>
+            <li>和家人一起合唱，录下来听自己的进步</li>
+          </ul>
+        </div>
+        <div class="subj-goal">激励目标：音乐 ≥ 95%，解锁称号「音乐小精灵」</div>
+      </div>
+
+    </div>
+  </section>
+
 
   <section class="panel">
     <h2 class="panel-title">
