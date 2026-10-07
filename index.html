@@ -442,6 +442,21 @@
   .subj-path li::before { content: '\2022'; position: absolute; left: 0; color: #00D4FF; }
   .subj-goal { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); border-radius: 8px; padding: 8px 10px; font-size: 0.8rem; color: #FFD700; line-height: 1.6; }
 
+  /* ===== Standard Check ===== */
+  .stand-stats { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .stand-stat { flex: 1; min-width: 140px; text-align: center; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--panel-border); background: var(--panel); }
+  .stand-stat .num { font-size: 1.6rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; line-height: 1.2; }
+  .stand-stat .lbl { font-size: 0.78rem; color: var(--text-dim); }
+  .stand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stand-card { background: var(--panel); border: 1px solid var(--panel-border); border-radius: 12px; padding: 14px; border-left: 4px solid; }
+  .stand-head { display: flex; align-items: center; gap: 8px; }
+  .stand-name { font-weight: 700; font-size: 0.95rem; }
+  .stand-pct { margin-left: auto; font-weight: 900; font-size: 1.15rem; font-family: 'ZCOOL KuaiLe', cursive; }
+  .stand-att { font-size: 0.75rem; color: var(--text-dim); background: rgba(255,255,255,0.08); padding: 1px 7px; border-radius: 8px; }
+  .stand-badge { font-size: 0.7rem; padding: 2px 9px; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
+  .stand-note { font-size: 0.8rem; color: #9FB4D4; margin-top: 6px; line-height: 1.6; }
+  .stand-note.ok { color: #8FD8B0; }
+
   /* ===== Responsive ===== */
   @media (max-width: 860px) {
     .dim-grid { grid-template-columns: repeat(2, 1fr); }
@@ -846,6 +861,133 @@
     </div>
   </section>
 
+
+  <section class="panel">
+    <h2 class="panel-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF3838" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17v.5"/></svg>
+      达标警示板 · STANDARD CHECK
+    </h2>
+    <p class="panel-sub">家庭标准：分数 ≥90 达标，80–89 警戒，低于 80 不达标；态度评级 A 达标，B 及以下不达标。以下对照一年级 Term 3 全科成绩。</p>
+
+    <div class="stand-stats">
+      <div class="stand-stat"><div class="num" style="color:#4ADE80;">6</div><div class="lbl">达标（≥90 + 态度A）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#FFD700;">6</div><div class="lbl">警戒（一项或两项未达标）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#FF3838;">0</div><div class="lbl">不达标（&lt;80 或 态度C以下）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#00D4FF;">50%</div><div class="lbl">达标率（6/12 科）</div></div>
+    </div>
+
+    <div class="stand-grid">
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">数学</span><span class="stand-att">98%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">分数、态度双达标。别满足，还差 2 分满级。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">科学</span><span class="stand-att">100%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">满分守护中。保持 + 动手做实验，守住阵地。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">英语</span><span class="stand-att">96%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">双达标。目标：敢开口，冲 98。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">普通话</span><span class="stand-att">98%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">双达标。母语的下一关：讲得精彩。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">品格培养</span><span class="stand-att">97%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">榜样级表现，继续保持。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#4ADE80;">
+        <div class="stand-head">
+          <span class="stand-name">全球视野</span><span class="stand-att">90%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+        </div>
+        <div class="stand-note ok">刚好踩线达标——再稳一点，别掉到警戒区。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">艺术设计</span><span class="stand-att">86%</span>
+          <span class="stand-pct" style="color:#FFD700;">A</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">态度满分，分数差 4 分。每周多画 1 幅，突破 90 大关。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">印尼语</span><span class="stand-att">89%</span>
+          <span class="stand-pct" style="color:#FFD700;">A</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">只差 1 分！每天 3 句日常对话，跨过 90 线。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">音乐</span><span class="stand-att">91%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数达标，态度差一档。认真参与每节课，把 B 升成 A。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">公民教育</span><span class="stand-att">94%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数很好，态度差一档。专注听讲、积极发言，A 就在眼前。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">数字素养</span><span class="stand-att">92%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">新科目分数亮眼，态度要加油——认真完成每次练习，升 A 不难。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FF3838;">
+        <div class="stand-head">
+          <span class="stand-name">体育</span><span class="stand-att">81%</span>
+          <span class="stand-pct" style="color:#FF3838;">B</span>
+          <span class="stand-badge" style="background:rgba(255,56,56,0.15); color:#FF3838;">最需警惕</span>
+        </div>
+        <div class="stand-note">最接近红线的一科：分数差 9 分、态度差一档。每周 3 次运动 + 认真参与，双线追上。</div>
+      </div>
+
+    </div>
+  </section>
 
   <section class="panel">
     <h2 class="panel-title">
