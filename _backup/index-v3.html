@@ -445,7 +445,7 @@
   <h1 class="font-display">AL 战斗成长档案</h1>
   <div class="subtitle">ULTRA GROWTH REPORT</div>
   <div class="hero-img"><img src="assets/hero.png" alt="AL"></div>
-  <div class="power-level">综合战斗力 59.1 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维55.1 + 额外技能4/15)</span></div>
+  <div class="power-level">综合战斗力 58.9 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维54.9 + 额外技能4/15)</span></div>
 </header>
 
 <div class="container">
@@ -662,31 +662,6 @@
 
   <section class="panel">
     <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
-      素养与习惯 · 新数据考量
-    </h2>
-    <p class="panel-sub">除了科目分数，报告还考察态度、素养与出勤——这些才是成长真正的底色。</p>
-    <div class="hl-grid" style="margin-top:6px;">
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#00D4FF;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="hl-title" style="color:#00D4FF;">态度与参与度</div>
-        <div class="hl-text">Term 3 各科态度评级 8A + 4B，全部在 Good 以上。上课投入、积极参与，是成绩背后的发动机。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#A78BFA;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="hl-title" style="color:#A78BFA;">四大素养全满分</div>
-        <div class="hl-text">精神品格、终身学习、协作沟通、批判性思维——12 项观察全部达到 Always 最高档。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#4ADE80;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4ADE80" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
-        <div class="hl-title" style="color:#4ADE80;">出勤记录</div>
-        <div class="hl-text">Term 1 与 Term 3 全勤（0缺勤0迟到）；期中段因故缺勤 7 天，依然保持高分——学习韧性可见一斑。</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2 class="panel-title">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
       老师的话 · 班主任评语
     </h2>
@@ -769,24 +744,24 @@ const timelineStories = [
 
 // ===== 小学数据（一年级 2024-25）=====
 const primaryTerms = [
-  { label: 'Term 1', time: '2024', title: '小学启程', data: [9.6, 9.7, 8.8, 8.5, 9.2, 8.9] },
-  { label: '期中', time: '2025', title: '全面开花', data: [9.6, 9.4, 9.0, 8.6, 9.0, 9.3] },
-  { label: 'Term 3', time: '2025', title: '巅峰之战', data: [9.9, 9.5, 8.9, 8.1, 9.4, 9.3] },
+  { label: 'Term 1', time: '2024', title: '小学启程', data: [9.7, 9.6, 8.8, 8.5, 9.2, 9.2] },
+  { label: '期中', time: '2025', title: '全面开花', data: [9.7, 9.4, 9.0, 8.6, 9.0, 8.9] },
+  { label: 'Term 3', time: '2025', title: '巅峰之战', data: [9.9, 9.4, 8.9, 8.1, 9.4, 9.2] },
 ];
 
 const primaryStories = [
-  { story: '数学98%×70% + 科学100%×30%——科学连续满分，数学接近满分。数理双王牌，稳稳的高地。', badge: '王牌角', trend: '9.6 → 9.9，数理双王牌' },
-  { story: '英语96%×40% + 普通话98%×35% + 印尼语89%×25%——按教学语言权重折算，三语全能依旧亮眼。', badge: '多语角', trend: '9.7 → 9.5，三语全能' },
-  { story: '艺术设计86% + 音乐91% 平均——从幼儿园的艺术种子长成小学的优雅之花。', badge: '优雅角', trend: '8.8 → 8.9，稳步发挥' },
+  { story: '数学98%、科学100%——科学连续满分，数学接近满分。理科双王牌，稳稳的高地。', badge: '王牌角', trend: '9.7 → 9.9，科学连续满分' },
+  { story: '英语96%、普通话98%、印尼语89%——三门语言齐头并进，从小多语的底气。', badge: '多语角', trend: '9.6 → 9.4，三语全能' },
+  { story: '艺术设计86%、音乐91%——从幼儿园的艺术种子长成小学的优雅之花。', badge: '优雅角', trend: '8.8 → 8.9，稳步发挥' },
   { story: '体育81%——小学的新挑战。精力充沛的战士，身体还需要跟上脑子的速度。', badge: '修炼角', trend: '8.5 → 8.1，有待加强' },
-  { story: '品格97%×40% + 公民94%×30% + 全球视野90%×30%——四大素养全部满分加持，他是班里的榜样。', badge: '榜样角', trend: '9.2 → 9.4，素养全优' },
-  { story: '态度与参与度评级(8A4B)×70% + 数字素养92%×30%——从上课态度到数字素养都在稳步升级。', badge: '新星角', trend: '8.9 → 9.3，态度+数字素养' },
+  { story: '品格97%、公民94%、全球视野90%——四大素养（精神品格/终身学习/协作沟通/批判性思维）全部满分。', badge: '榜样角', trend: '9.2 → 9.4，素养全优' },
+  { story: '数字素养92%、ICT 92%——新科目首秀就亮眼，专注力在升级路上。', badge: '新星角', trend: '9.2 → 9.2，数字素养亮眼' },
 ];
 
 const primaryTimelineStories = [
   '进入小学一年级。科学和普通话满分，全勤记录（0缺勤0迟到），全新科目大展身手。',
-  '老师盛赞"潜力巨大"，四大素养全部满分。本段缺勤7天但成绩依旧出色；数学应用题（Problem Solving）是下一个修炼目标。',
-  '科学连续满分、数学98%、英语96%、普通话98%，再度全勤。体育81%成为新的修炼方向。',
+  '老师盛赞"潜力巨大"。四大素养全部满分。数学应用题（Problem Solving）是下一个修炼目标。',
+  '科学连续满分、数学98%、英语96%、普通话98%。体育81%成为新的修炼方向。',
 ];
 
 const icons = {
