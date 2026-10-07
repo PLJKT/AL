@@ -123,6 +123,7 @@
 
   /* ===== Radar ===== */
   #radar-chart { width: 100%; height: 500px; }
+  #radar-chart-primary { width: 100%; height: 500px; }
 
   .term-nav {
     display: flex;
@@ -155,6 +156,7 @@
 
   /* ===== Growth Curve ===== */
   #curve-chart { width: 100%; height: 380px; }
+  #curve-chart-primary { width: 100%; height: 380px; }
 
   /* ===== Dimension Cards ===== */
   .dim-grid {
@@ -462,14 +464,19 @@
     .dim-grid { grid-template-columns: repeat(2, 1fr); }
     .hl-grid { grid-template-columns: 1fr; }
     .skill-grid { grid-template-columns: 1fr; }
+    .stand-grid { grid-template-columns: repeat(2, 1fr); }
     #radar-chart { height: 420px; }
     #curve-chart { height: 320px; }
+    #radar-chart-primary { height: 420px; }
+    #curve-chart-primary { height: 320px; }
   }
   @media (max-width: 540px) {
     .dim-grid { grid-template-columns: 1fr; }
+    .stand-grid { grid-template-columns: 1fr; }
     .hero { padding: 30px 16px 20px; }
     .panel { padding: 18px 14px; }
     #radar-chart { height: 380px; }
+    #radar-chart-primary { height: 380px; }
     .hero .hero-img { width: 180px; }
   }
 </style>
