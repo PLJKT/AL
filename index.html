@@ -1406,6 +1406,15 @@ renderRadar();
 renderNavPrimary();
 renderRadarPrimary();
 window.addEventListener('resize', () => { radarChart.resize(); curveChart.resize(); radarChartPrimary.resize(); curveChartPrimary.resize(); });
+// 兜底：页面资源完全加载后重绘一次，确保容器尺寸就绪时图表一定渲染
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    radarChart.resize();
+    curveChart.resize();
+    radarChartPrimary.resize();
+    curveChartPrimary.resize();
+  }, 120);
+});
 </script>
 
 </body>
