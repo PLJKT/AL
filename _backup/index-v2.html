@@ -445,7 +445,7 @@
   <h1 class="font-display">AL 战斗成长档案</h1>
   <div class="subtitle">ULTRA GROWTH REPORT</div>
   <div class="hero-img"><img src="assets/hero.png" alt="AL"></div>
-  <div class="power-level">综合战斗力 58.9 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维54.9 + 额外技能4/15)</span></div>
+  <div class="power-level">综合战斗力 52.8 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(六维48.8 + 额外技能4/15)</span></div>
 </header>
 
 <div class="container">
@@ -454,7 +454,7 @@
   <section class="panel">
     <h2 class="panel-title">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polygon points="12,2 22,8.5 18,20 6,20 2,8.5"/></svg>
-      幼儿园时期 · 六维能力雷达图
+      六维能力雷达图
     </h2>
     <p class="panel-sub">点击下方按钮切换战斗时期，看 AL 的能力六边形如何一路进化。虚线是起点，实线是当前。</p>
     <div id="radar-chart"></div>
@@ -465,7 +465,7 @@
   <section class="panel">
     <h2 class="panel-title">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
-      幼儿园成长能量曲线
+      成长能量曲线
     </h2>
     <p class="panel-sub">七个学期，六个维度的战斗力变化轨迹。每条线都是一次升级记录。</p>
     <div id="curve-chart"></div>
@@ -474,7 +474,7 @@
   <!-- ===== Dimension Cards ===== -->
   <h2 class="panel-title" style="margin-top:40px; margin-bottom:4px;">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    幼儿园战斗属性面板
+    战斗属性面板
   </h2>
   <p class="panel-sub">每个属性都在升级，没有弱角，只有还没发光的地方。</p>
 
@@ -628,46 +628,10 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
       战斗记录
     </h2>
-    <p class="panel-sub">从幼儿园到小学，十场战斗，每一场都在变强。</p>
+    <p class="panel-sub">七场战斗，每一场都在变强。</p>
     <div class="timeline" id="timeline"></div>
   </section>
 
-  <!-- ===== Primary Section ===== -->
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2.8 3.5L12 2l-2.8 3.5M12 2v6M4 6l3 3-3-3m16 0l-3 3 3-3M12 9l2 5 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/></svg>
-      小学时期 PRIMARY
-    </h2>
-    <p class="panel-sub">2024-25 学年，AL 升入 Springfield 小学一年级。新战场、新科目（科学、数字素养、公民教育、印尼语……），六边形继续进化。</p>
-    <div id="radar-chart-primary"></div>
-    <div class="term-nav" id="term-nav-primary"></div>
-  </section>
-
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
-      小学成长能量曲线
-    </h2>
-    <p class="panel-sub">一年级三个节点：Term 1 → 期中总评 → Term 3。</p>
-    <div id="curve-chart-primary"></div>
-  </section>
-
-  <h2 class="panel-title" style="margin-top:40px; margin-bottom:4px;">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    小学战斗属性面板
-  </h2>
-  <p class="panel-sub">科目更多了，AL 的光芒也更亮了。</p>
-
-  <div class="dim-grid" id="dim-grid-primary"></div>
-
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
-      老师的话 · 班主任评语
-    </h2>
-    <p class="panel-sub" style="font-size:0.95rem; line-height:1.9; color:#B8C8E0;">"Alex displays a tremendous amount of his potential. His understanding of the material covered in class was admirable and this has allowed him to achieve good results with activities and assessments in class. Well done, Alex"</p>
-    <p class="panel-sub" style="color:var(--gold);">—— AL 展现了他的巨大潜力。他对课堂所学内容的理解令人赞叹，这让他在课堂活动和评估中都取得了优异成绩。做得好，Alex！</p>
-  </section>
   <!-- ===== Highlights ===== -->
   <section class="panel">
     <h2 class="panel-title" style="justify-content:center;">
@@ -699,7 +663,7 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <p class="quote font-display">"你已经学会等别人说完啦，你已经学会控制自己的力量啦。继续发光吧，AL。"</p>
-  <p>ULTRA GROWTH RECORD · 幼儿园 2023—2024 · 小学 2024—2025 · 光之少年成长档案</p>
+  <p>ULTRA GROWTH RECORD · 2023 — 2024 · 光之少年成长档案</p>
 </footer>
 
 <script>
@@ -740,28 +704,6 @@ const timelineStories = [
   '调整与回升。社交和专注开始回暖，英语满能量，正在找回节奏。',
   '突破时刻！社交回到 7.5，学会了"轮到自己才大声"，专注也在改善。',
   '收获之战。六个属性全面向好，艺术回到满能量，AL 越来越强了。',
-];
-
-// ===== 小学数据（一年级 2024-25）=====
-const primaryTerms = [
-  { label: 'Term 1', time: '2024', title: '小学启程', data: [9.7, 9.6, 8.8, 8.5, 9.2, 9.2] },
-  { label: '期中', time: '2025', title: '全面开花', data: [9.7, 9.4, 9.0, 8.6, 9.0, 8.9] },
-  { label: 'Term 3', time: '2025', title: '巅峰之战', data: [9.9, 9.4, 8.9, 8.1, 9.4, 9.2] },
-];
-
-const primaryStories = [
-  { story: '数学98%、科学100%——科学连续满分，数学接近满分。理科双王牌，稳稳的高地。', badge: '王牌角', trend: '9.7 → 9.9，科学连续满分' },
-  { story: '英语96%、普通话98%、印尼语89%——三门语言齐头并进，从小多语的底气。', badge: '多语角', trend: '9.6 → 9.4，三语全能' },
-  { story: '艺术设计86%、音乐91%——从幼儿园的艺术种子长成小学的优雅之花。', badge: '优雅角', trend: '8.8 → 8.9，稳步发挥' },
-  { story: '体育81%——小学的新挑战。精力充沛的战士，身体还需要跟上脑子的速度。', badge: '修炼角', trend: '8.5 → 8.1，有待加强' },
-  { story: '品格97%、公民94%、全球视野90%——四大素养（精神品格/终身学习/协作沟通/批判性思维）全部满分。', badge: '榜样角', trend: '9.2 → 9.4，素养全优' },
-  { story: '数字素养92%、ICT 92%——新科目首秀就亮眼，专注力在升级路上。', badge: '新星角', trend: '9.2 → 9.2，数字素养亮眼' },
-];
-
-const primaryTimelineStories = [
-  '进入小学一年级。科学和普通话满分，全勤记录（0缺勤0迟到），全新科目大展身手。',
-  '老师盛赞"潜力巨大"。四大素养全部满分。数学应用题（Problem Solving）是下一个修炼目标。',
-  '科学连续满分、数学98%、英语96%、普通话98%。体育81%成为新的修炼方向。',
 ];
 
 const icons = {
@@ -807,139 +749,6 @@ terms.forEach((t, i) => {
     <div class="tl-desc">${timelineStories[i]}</div>
   `;
   tl.appendChild(item);
-});
-
-// 追加小学时间线节点
-const primaryDotColors = ['#FFD700', '#00D4FF', '#FF6B9D'];
-primaryTerms.forEach((t, i) => {
-  const item = document.createElement('div');
-  item.className = 'tl-item';
-  item.innerHTML = `
-    <div class="tl-dot" style="background:${primaryDotColors[i]}; color:${primaryDotColors[i]}; left:-31px"></div>
-    <div class="tl-term"><span style="color:var(--gold);">小学</span> ${t.label}<span class="tl-title">${t.title}</span><span class="tl-time">${t.time}</span></div>
-    <div class="tl-desc">${primaryTimelineStories[i]}</div>
-  `;
-  tl.appendChild(item);
-});
-
-// ===== 小学雷达图 =====
-const radarChartPrimary = echarts.init(document.getElementById('radar-chart-primary'));
-const navPrimary = document.getElementById('term-nav-primary');
-let primaryIdx = primaryTerms.length - 1;
-
-function renderNavPrimary() {
-  navPrimary.innerHTML = '';
-  primaryTerms.forEach((t, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'term-btn' + (i === primaryIdx ? ' active' : '');
-    btn.innerHTML = `${t.label}<span class="time">${t.title}</span>`;
-    btn.onclick = () => { primaryIdx = i; renderNavPrimary(); renderRadarPrimary(); };
-    navPrimary.appendChild(btn);
-  });
-}
-
-function renderRadarPrimary() {
-  const t = primaryTerms[primaryIdx];
-  radarChartPrimary.setOption({
-    tooltip: { trigger: 'item' },
-    legend: {
-      data: ['起点（Term 1）', '当前（' + t.label + '·' + t.title + '）'],
-      bottom: 0,
-      textStyle: { fontSize: 12, color: '#7A90B0' },
-    },
-    radar: {
-      indicator: dims.map(d => ({ name: d.name, max: 10 })),
-      shape: 'polygon',
-      splitNumber: 5,
-      center: ['50%', '52%'],
-      radius: '65%',
-      axisName: { color: '#E8F0FF', fontSize: 13, fontWeight: 700 },
-      splitArea: {
-        areaStyle: {
-          color: ['rgba(255,215,0,0.02)', 'rgba(255,215,0,0.04)', 'rgba(255,215,0,0.06)', 'rgba(255,215,0,0.08)', 'rgba(255,215,0,0.1)'],
-        },
-      },
-      splitLine: { lineStyle: { color: 'rgba(255,215,0,0.2)' } },
-      axisLine: { lineStyle: { color: 'rgba(255,215,0,0.3)' } },
-    },
-    series: [{
-      type: 'radar',
-      data: [
-        {
-          value: primaryTerms[0].data,
-          name: '起点（Term 1）',
-          lineStyle: { color: '#7A90B0', width: 2, type: 'dashed' },
-          areaStyle: { color: 'rgba(122,144,176,0.1)' },
-          itemStyle: { color: '#7A90B0' },
-          symbolSize: 5,
-        },
-        {
-          value: t.data,
-          name: '当前（' + t.label + '·' + t.title + '）',
-          lineStyle: { color: '#FFD700', width: 3, shadowBlur: 10, shadowColor: 'rgba(255,215,0,0.5)' },
-          areaStyle: { color: 'rgba(255,215,0,0.2)' },
-          itemStyle: { color: '#FFD700' },
-          symbolSize: 7,
-        },
-      ],
-    }],
-  }, true);
-}
-
-// ===== 小学成长曲线 =====
-const curveChartPrimary = echarts.init(document.getElementById('curve-chart-primary'));
-curveChartPrimary.setOption({
-  tooltip: { trigger: 'axis' },
-  legend: {
-    data: dims.map(d => d.name),
-    bottom: 0,
-    textStyle: { color: '#7A90B0', fontSize: 12 },
-  },
-  grid: { left: 40, right: 20, top: 20, bottom: 60 },
-  xAxis: {
-    type: 'category',
-    data: primaryTerms.map(t => t.label),
-    axisLine: { lineStyle: { color: 'rgba(255,215,0,0.3)' } },
-    axisLabel: { color: '#7A90B0' },
-  },
-  yAxis: {
-    type: 'value',
-    min: 0,
-    max: 10,
-    splitLine: { lineStyle: { color: 'rgba(255,215,0,0.1)' } },
-    axisLabel: { color: '#7A90B0' },
-  },
-  series: dims.map((d, i) => ({
-    name: d.name,
-    type: 'line',
-    smooth: true,
-    data: primaryTerms.map(t => t.data[i]),
-    lineStyle: { color: d.color, width: 2.5 },
-    itemStyle: { color: d.color },
-    symbolSize: 7,
-  })),
-});
-
-// ===== 小学维度卡片 =====
-const dimGridPrimary = document.getElementById('dim-grid-primary');
-const latestPrimary = primaryTerms[primaryTerms.length - 1].data;
-dims.forEach((d, i) => {
-  const s = primaryStories[i];
-  const card = document.createElement('div');
-  card.className = 'dim-card';
-  card.style.borderLeftColor = d.color;
-  card.innerHTML = `
-    <div class="dim-head">
-      <div class="dim-icon" style="border-color:${d.color}; background:${d.color}15;">${icons[d.icon]}</div>
-      <div class="dim-name">${d.name}</div>
-      <div class="dim-score" style="color:${d.color}">${latestPrimary[i].toFixed(1)}</div>
-    </div>
-    <div class="dim-bar"><div class="dim-bar-fill" style="width:${latestPrimary[i]*10}%; background:${d.color}; box-shadow:0 0 8px ${d.color};"></div></div>
-    <div class="dim-trend">${s.trend}</div>
-    <div class="dim-story">${s.story}</div>
-    <span class="dim-badge" style="border-color:${d.color}; color:${d.color};">${s.badge}</span>
-  `;
-  dimGridPrimary.appendChild(card);
 });
 
 // ===== 雷达图 =====
@@ -1042,9 +851,7 @@ curveChart.setOption({
 
 renderNav();
 renderRadar();
-renderNavPrimary();
-renderRadarPrimary();
-window.addEventListener('resize', () => { radarChart.resize(); curveChart.resize(); radarChartPrimary.resize(); curveChartPrimary.resize(); });
+window.addEventListener('resize', () => { radarChart.resize(); curveChart.resize(); });
 </script>
 
 </body>
