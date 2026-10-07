@@ -159,6 +159,28 @@
   #curve-chart-primary { width: 100%; height: 380px; }
   .radar-total { text-align: center; margin-top: 14px; font-size: 0.92rem; color: #7A90B0; letter-spacing: 1px; }
   .radar-total b { color: #FFD700; font-size: 1.3rem; font-family: 'ZCOOL KuaiLe', cursive; margin: 0 4px; }
+  .grade-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .grade-btn {
+    padding: 8px 20px;
+    border: 1.5px solid rgba(255,215,0,0.35);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .grade-btn:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+  .grade-btn.active {
+    background: linear-gradient(135deg, var(--gold), #E6B800);
+    border-color: var(--gold);
+    color: #0A1628;
+    box-shadow: 0 0 16px rgba(255,215,0,0.5);
+  }
+  .grade-btn .time { font-size: 0.72rem; opacity: 0.85; display: block; font-family: 'Noto Sans SC', sans-serif; font-weight: 400; }
 
   /* ===== Dimension Cards ===== */
   .dim-grid {
@@ -491,7 +513,7 @@
   <h1 class="font-display">AL 战斗成长档案</h1>
   <div class="subtitle">ULTRA GROWTH REPORT</div>
   <div class="hero-img"><img src="assets/hero.png" alt="AL"></div>
-  <div class="power-level">综合战斗力 62.1 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维55.1 + 额外技能7/15)</span></div>
+  <div class="power-level">综合战斗力 61.3 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维54.3 + 额外技能7/15)</span></div>
 </header>
 
 <div class="container">
@@ -681,9 +703,10 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2.8 3.5L12 2l-2.8 3.5M12 2v6M4 6l3 3-3-3m16 0l-3 3 3-3M12 9l2 5 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/></svg>
       小学时期 PRIMARY
     </h2>
-    <p class="panel-sub">P1 · 一年级（Grade 1，Springfield，2024-25 学年）。一个年级标准三个学期：Term 1 → Semester 1（期中）→ Term 3。新战场、新科目（科学、数字素养、公民教育、印尼语……），六边形继续进化。</p>
+    <p class="panel-sub">三份学年报告，从一年级一路打到三年级：P1（Grade 1 · 2024-25）→ P2（Grade 2 · 2025-26）→ P3（Grade 3 · 2026-27，当前）。每份学年按 Term 与 Semester 记录成长；Grade 1 = P1 = 一年级，依此类推。新战场、新科目（科学、数字素养、公民教育、印尼语……），六边形继续进化。</p>
     <div id="radar-chart-primary"></div>
     <div class="radar-total" id="radar-total-primary"></div>
+    <div class="grade-tabs" id="grade-tabs-primary"></div>
     <div class="term-nav" id="term-nav-primary"></div>
   </section>
 
@@ -692,7 +715,7 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
       小学成长能量曲线
     </h2>
-    <p class="panel-sub">P1 一年级三个学期节点：Term 1 → Semester 1（期中总评）→ Term 3。</p>
+    <p class="panel-sub">九个节点 × 六大属性：从 P1 Term 1 一路打到 P3 Term 1（当前战斗），看六边形的进化轨迹。</p>
     <div id="curve-chart-primary"></div>
   </section>
 
@@ -700,7 +723,7 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     小学战斗属性面板
   </h2>
-  <p class="panel-sub">科目更多了，AL 的光芒也更亮了。</p>
+  <p class="panel-sub">最新数据 · P3（三年级）Term 1 当前战斗。科目更多了，AL 的光芒也更亮了。</p>
 
   <div class="dim-grid" id="dim-grid-primary"></div>
 
@@ -715,10 +738,10 @@
       <div class="subj-card" style="border-top-color:#FFD700;">
         <div class="subj-head">
           <span class="subj-name">数学</span>
-          <span class="subj-status" style="color:#FFD700; border:1px solid rgba(255,215,0,0.4);">冲刺满级</span>
-          <span class="subj-pct" style="color:#FFD700;">98%</span>
+          <span class="subj-status" style="color:#FFD700; border:1px solid rgba(255,215,0,0.4);">态度告急</span>
+          <span class="subj-pct" style="color:#FFD700;">93%</span>
         </div>
-        <div class="subj-review">98 分很棒，但还差 2 分就满级了。那些错题不是失败，是还没被你打败的小怪兽——降服它们，你就能摸到满分。</div>
+        <div class="subj-review">93 分仍在达标线上，但态度从 A 掉到 B——三年级数学变难了，战场更需要热情。那些错题不是失败，是还没被你打败的小怪兽。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -726,16 +749,16 @@
             <li>准备"怪兽本"：每订正一道错题 = 击败一只怪兽，攒 10 只召唤满分</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：下一阶段数学 ≥ 99%，达成解锁称号「数理大师」</div>
+        <div class="subj-goal">激励目标：数学 ≥ 96% + 态度升回 A，解锁称号「数理大师」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#00E5FF;">
         <div class="subj-head">
           <span class="subj-name">科学</span>
-          <span class="subj-status" style="color:#00E5FF; border:1px solid rgba(0,229,255,0.4);">满级守护</span>
-          <span class="subj-pct" style="color:#00E5FF;">100%</span>
+          <span class="subj-status" style="color:#00E5FF; border:1px solid rgba(0,229,255,0.4);">踩线达标</span>
+          <span class="subj-pct" style="color:#00E5FF;">90%</span>
         </div>
-        <div class="subj-review">连续满分很耀眼，但科学没有终点——课本上的知识，只有亲手做实验才会真正属于你。从"会答"到"会做"，是下一关。</div>
+        <div class="subj-review">90 分刚好踩线，但对比二年级的 91–99 明显回落。三年级科学更深了——课本上的知识，亲手做实验才会真正属于你。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -743,16 +766,16 @@
             <li>准备"观察记录本"，把每次实验画下来、写一句发现</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：保持满分 + 完成 3 个家庭实验，解锁装备「科学之眼」</div>
+        <div class="subj-goal">激励目标：科学 ≥ 93%，解锁装备「科学之眼」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#5B8DEF;">
         <div class="subj-head">
           <span class="subj-name">英语</span>
-          <span class="subj-status" style="color:#5B8DEF; border:1px solid rgba(91,141,239,0.4);">稳定上升</span>
-          <span class="subj-pct" style="color:#5B8DEF;">96%</span>
+          <span class="subj-status" style="color:#5B8DEF; border:1px solid rgba(91,141,239,0.4);">重点修炼</span>
+          <span class="subj-pct" style="color:#5B8DEF;">85%</span>
         </div>
-        <div class="subj-review">从幼儿园"多讲英语"的小提醒，到现在 96 分——你已经走得很远。但语言的战场没有尽头：敢开口、说流利，就是下一个等级。</div>
+        <div class="subj-review">85 分滑进警戒区——这是目前最需要追赶的科目。别怕，你从幼儿园一路都在进步，把阅读和开口捡回来，英语会回来的。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -760,16 +783,16 @@
             <li>课堂上主动举手用英语回答，每周至少 5 次</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：英语 ≥ 98% + 课堂发言打卡，解锁称号「英语小主播」</div>
+        <div class="subj-goal">激励目标：英语 ≥ 90%，解锁称号「英语小主播」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#E86A92;">
         <div class="subj-head">
           <span class="subj-name">普通话</span>
-          <span class="subj-status" style="color:#E86A92; border:1px solid rgba(232,106,146,0.4);">稳步高位</span>
-          <span class="subj-pct" style="color:#E86A92;">98%</span>
+          <span class="subj-status" style="color:#E86A92; border:1px solid rgba(232,106,146,0.4);">高位守护</span>
+          <span class="subj-pct" style="color:#E86A92;">99%</span>
         </div>
-        <div class="subj-review">98 分证明你能读、能写，但母语的下一关不是分数，是"讲得精彩"——让中文变得有故事、有温度、有感染力。</div>
+        <div class="subj-review">99 分几乎满分，普通话是你的王牌。母语的下一关不是分数，是"讲得精彩"——让中文变得有故事、有温度、有感染力。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -783,10 +806,10 @@
       <div class="subj-card" style="border-top-color:#4ADE80;">
         <div class="subj-head">
           <span class="subj-name">印尼语</span>
-          <span class="subj-status" style="color:#4ADE80; border:1px solid rgba(74,222,128,0.4);">稳步提升</span>
-          <span class="subj-pct" style="color:#4ADE80;">89%</span>
+          <span class="subj-status" style="color:#4ADE80; border:1px solid rgba(74,222,128,0.4);">稳中有升</span>
+          <span class="subj-pct" style="color:#4ADE80;">96%</span>
         </div>
-        <div class="subj-review">89 分说明基础已经打牢，而印尼语每天都在你身边——把课堂学到的词用进生活，进步会快得超乎想象。</div>
+        <div class="subj-review">96 分优秀。印尼语每天都在你身边——把课堂学到的词用进生活，进步会快得超乎想象。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -794,16 +817,16 @@
             <li>每周看 10 分钟印尼语动画片，跟着主角复读</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：印尼语 ≥ 92%，解锁称号「双语小达人」</div>
+        <div class="subj-goal">激励目标：印尼语 ≥ 97%，解锁称号「双语小达人」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#FF6B35;">
         <div class="subj-head">
           <span class="subj-name">体育</span>
-          <span class="subj-status" style="color:#FF6B35; border:1px solid rgba(255,107,53,0.4);">重点修炼</span>
-          <span class="subj-pct" style="color:#FF6B35;">81%</span>
+          <span class="subj-status" style="color:#FF6B35; border:1px solid rgba(255,107,53,0.4);">双线追赶</span>
+          <span class="subj-pct" style="color:#FF6B35;">84%</span>
         </div>
-        <div class="subj-review">81 分是最需要追赶的一角，但别忘了——你从小就是精力充沛的小战士！身体是一切冒险的本钱，把运动变成每天的快乐任务。</div>
+        <div class="subj-review">84 分在警戒区、态度 B——体能是最需要拉回正轨的一角。你从小就是精力充沛的小战士，动起来，把身体练成最硬的铠甲！</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -811,16 +834,16 @@
             <li>每天跳绳 100 下打卡，从"气喘"练到"轻松"</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：体育 ≥ 88%，解锁装备「疾风战靴」</div>
+        <div class="subj-goal">激励目标：体育 ≥ 90% + 态度升 A，解锁装备「疾风战靴」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#A78BFA;">
         <div class="subj-head">
           <span class="subj-name">数字素养</span>
-          <span class="subj-status" style="color:#A78BFA; border:1px solid rgba(167,139,250,0.4);">新星冲刺</span>
-          <span class="subj-pct" style="color:#A78BFA;">92%</span>
+          <span class="subj-status" style="color:#A78BFA; border:1px solid rgba(167,139,250,0.4);">态度之坎</span>
+          <span class="subj-pct" style="color:#A78BFA;">99%</span>
         </div>
-        <div class="subj-review">首秀就拿到 92 分，说明你对数字世界天生敏感。但科技不是用来玩的，是用来"创造"的——学会驾驭它，而不是被它牵着走。</div>
+        <div class="subj-review">99 分接近满分级，但态度 B 是唯一的短板——认真完成每次练习，别让粗心拖后腿。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -828,16 +851,16 @@
             <li>用绘图软件完成 1 幅作品，展示给家人</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：数字素养 ≥ 95%，解锁称号「科技小先锋」</div>
+        <div class="subj-goal">激励目标：保持 ≥ 97% + 态度升 A，解锁称号「科技小先锋」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#FF9A3D;">
         <div class="subj-head">
           <span class="subj-name">艺术设计</span>
           <span class="subj-status" style="color:#FF9A3D; border:1px solid rgba(255,154,61,0.4);">探索进阶</span>
-          <span class="subj-pct" style="color:#FF9A3D;">86%</span>
+          <span class="subj-pct" style="color:#FF9A3D;">87%</span>
         </div>
-        <div class="subj-review">86 分不是终点，是画笔还在找自己的风格。你从小就有创造力，现在只需要多画、多观察——灵感会在纸上自己长大。</div>
+        <div class="subj-review">87 分在警戒区、态度 B。画笔还在找自己的风格，多画、多观察——灵感会在纸上自己长大。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -845,16 +868,16 @@
             <li>观察树叶、云朵、小动物，画成自然日记</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：艺术设计 ≥ 90%，解锁称号「创意小画家」</div>
+        <div class="subj-goal">激励目标：艺术设计 ≥ 90% + 态度升 A，解锁称号「创意小画家」</div>
       </div>
 
       <div class="subj-card" style="border-top-color:#F472B6;">
         <div class="subj-head">
           <span class="subj-name">音乐</span>
           <span class="subj-status" style="color:#F472B6; border:1px solid rgba(244,114,182,0.4);">优雅进阶</span>
-          <span class="subj-pct" style="color:#F472B6;">91%</span>
+          <span class="subj-pct" style="color:#F472B6;">88%</span>
         </div>
-        <div class="subj-review">91 分很棒，音乐是你表达情绪的超能力。钢琴技能和课堂音乐可以互相成就——继续练琴，让旋律更有力量。</div>
+        <div class="subj-review">88 分在警戒区、态度 B。音乐是你表达情绪的超能力，钢琴技能和课堂音乐互相成就——继续练琴，让旋律更有力量。</div>
         <div class="subj-path">
           <div class="subj-path-title">增 长 路 径</div>
           <ul>
@@ -862,7 +885,7 @@
             <li>和家人一起合唱，录下来听自己的进步</li>
           </ul>
         </div>
-        <div class="subj-goal">激励目标：音乐 ≥ 95%，解锁称号「音乐小精灵」</div>
+        <div class="subj-goal">激励目标：音乐 ≥ 90% + 态度升 A，解锁称号「音乐小精灵」</div>
       </div>
 
     </div>
@@ -874,56 +897,101 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF3838" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17v.5"/></svg>
       达标警示板 · STANDARD CHECK
     </h2>
-    <p class="panel-sub">家庭标准：分数 ≥90 达标，80–89 警戒，低于 80 不达标；态度评级 A 达标，B 及以下不达标。以下对照 P1（一年级）Term 3 全科成绩。</p>
+    <p class="panel-sub">家庭标准：分数 ≥90 达标，80–89 警戒，低于 80 不达标；态度评级 A 达标，B 及以下不达标。以下对照 P3（三年级）Term 1 当前全科成绩。</p>
 
     <div class="stand-stats">
-      <div class="stand-stat"><div class="num" style="color:#4ADE80;">6</div><div class="lbl">达标（≥90 + 态度A）</div></div>
-      <div class="stand-stat"><div class="num" style="color:#FFD700;">6</div><div class="lbl">警戒（一项或两项未达标）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#4ADE80;">5</div><div class="lbl">达标（≥90 + 态度A）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#FFD700;">7</div><div class="lbl">警戒（一项或两项未达标）</div></div>
       <div class="stand-stat"><div class="num" style="color:#FF3838;">0</div><div class="lbl">不达标（&lt;80 或 态度C以下）</div></div>
-      <div class="stand-stat"><div class="num" style="color:#00D4FF;">50%</div><div class="lbl">达标率（6/12 科）</div></div>
+      <div class="stand-stat"><div class="num" style="color:#00D4FF;">42%</div><div class="lbl">达标率（5/12 科）</div></div>
     </div>
 
     <div class="stand-grid">
 
-      <div class="stand-card" style="border-left-color:#4ADE80;">
+      <div class="stand-card" style="border-left-color:#FFD700;">
         <div class="stand-head">
-          <span class="stand-name">数学</span><span class="stand-att">98%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
+          <span class="stand-name">数学</span><span class="stand-att">93%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
         </div>
-        <div class="stand-note ok">分数、态度双达标。别满足，还差 2 分满级。</div>
+        <div class="stand-note">分数达标，态度掉到 B。认真对待每道题，把 A 找回来。</div>
       </div>
 
       <div class="stand-card" style="border-left-color:#4ADE80;">
         <div class="stand-head">
-          <span class="stand-name">科学</span><span class="stand-att">100%</span>
+          <span class="stand-name">科学</span><span class="stand-att">90%</span>
           <span class="stand-pct" style="color:#4ADE80;">A</span>
           <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
         </div>
-        <div class="stand-note ok">满分守护中。保持 + 动手做实验，守住阵地。</div>
+        <div class="stand-note ok">踩线达标。别满足，动手做实验，守住阵地。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">英语</span><span class="stand-att">85%</span>
+          <span class="stand-pct" style="color:#4ADE80;">A</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数在警戒区。每天 20 分钟绘本朗读，把英语拉回 90+。</div>
       </div>
 
       <div class="stand-card" style="border-left-color:#4ADE80;">
         <div class="stand-head">
-          <span class="stand-name">英语</span><span class="stand-att">96%</span>
+          <span class="stand-name">普通话</span><span class="stand-att">99%</span>
           <span class="stand-pct" style="color:#4ADE80;">A</span>
           <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
         </div>
-        <div class="stand-note ok">双达标。目标：敢开口，冲 98。</div>
+        <div class="stand-note ok">母语王牌，保持高位。</div>
       </div>
 
       <div class="stand-card" style="border-left-color:#4ADE80;">
         <div class="stand-head">
-          <span class="stand-name">普通话</span><span class="stand-att">98%</span>
+          <span class="stand-name">印尼语</span><span class="stand-att">96%</span>
           <span class="stand-pct" style="color:#4ADE80;">A</span>
           <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
         </div>
-        <div class="stand-note ok">双达标。母语的下一关：讲得精彩。</div>
+        <div class="stand-note ok">优秀，继续把印尼语用进生活。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FF3838;">
+        <div class="stand-head">
+          <span class="stand-name">体育</span><span class="stand-att">84%</span>
+          <span class="stand-pct" style="color:#FF3838;">B</span>
+          <span class="stand-badge" style="background:rgba(255,56,56,0.15); color:#FF3838;">最需警惕</span>
+        </div>
+        <div class="stand-note">最接近红线的一科：分数警戒 + 态度 B。每周 3 次运动 + 认真参与，双线追上。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">数字素养</span><span class="stand-att">99%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数满分级，态度 B 是唯一短板。认真完成每次练习，升 A 不难。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">艺术设计</span><span class="stand-att">87%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数、态度双警戒。每周多画 1 幅，态度跟上。</div>
+      </div>
+
+      <div class="stand-card" style="border-left-color:#FFD700;">
+        <div class="stand-head">
+          <span class="stand-name">音乐</span><span class="stand-att">88%</span>
+          <span class="stand-pct" style="color:#FFD700;">B</span>
+          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
+        </div>
+        <div class="stand-note">分数、态度双警戒。认真参与音乐课，继续练琴。</div>
       </div>
 
       <div class="stand-card" style="border-left-color:#4ADE80;">
         <div class="stand-head">
-          <span class="stand-name">品格培养</span><span class="stand-att">97%</span>
+          <span class="stand-name">品格培养</span><span class="stand-att">93%</span>
           <span class="stand-pct" style="color:#4ADE80;">A</span>
           <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
         </div>
@@ -932,65 +1000,20 @@
 
       <div class="stand-card" style="border-left-color:#4ADE80;">
         <div class="stand-head">
-          <span class="stand-name">全球视野</span><span class="stand-att">90%</span>
+          <span class="stand-name">公民教育</span><span class="stand-att">93%</span>
           <span class="stand-pct" style="color:#4ADE80;">A</span>
           <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
         </div>
-        <div class="stand-note ok">刚好踩线达标——再稳一点，别掉到警戒区。</div>
+        <div class="stand-note ok">公民素养稳固，继续做负责任的少年。</div>
       </div>
 
       <div class="stand-card" style="border-left-color:#FFD700;">
         <div class="stand-head">
-          <span class="stand-name">艺术设计</span><span class="stand-att">86%</span>
-          <span class="stand-pct" style="color:#FFD700;">A</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">态度满分，分数差 4 分。每周多画 1 幅，突破 90 大关。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">印尼语</span><span class="stand-att">89%</span>
-          <span class="stand-pct" style="color:#FFD700;">A</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">只差 1 分！每天 3 句日常对话，跨过 90 线。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">音乐</span><span class="stand-att">91%</span>
+          <span class="stand-name">全球视野</span><span class="stand-att">89%</span>
           <span class="stand-pct" style="color:#FFD700;">B</span>
           <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
         </div>
-        <div class="stand-note">分数达标，态度差一档。认真参与每节课，把 B 升成 A。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">公民教育</span><span class="stand-att">94%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数很好，态度差一档。专注听讲、积极发言，A 就在眼前。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">数字素养</span><span class="stand-att">92%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">新科目分数亮眼，态度要加油——认真完成每次练习，升 A 不难。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FF3838;">
-        <div class="stand-head">
-          <span class="stand-name">体育</span><span class="stand-att">81%</span>
-          <span class="stand-pct" style="color:#FF3838;">B</span>
-          <span class="stand-badge" style="background:rgba(255,56,56,0.15); color:#FF3838;">最需警惕</span>
-        </div>
-        <div class="stand-note">最接近红线的一科：分数差 9 分、态度差一档。每周 3 次运动 + 认真参与，双线追上。</div>
+        <div class="stand-note">差 1 分 + 态度 B。关注时事、积极发言，跨过 90 线。</div>
       </div>
 
     </div>
@@ -1006,17 +1029,17 @@
       <div class="hl-item">
         <div class="hl-icon" style="border-color:#00D4FF;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
         <div class="hl-title" style="color:#00D4FF;">态度与参与度</div>
-        <div class="hl-text">P1 Term 3 各科态度评级 8A + 4B，全部在 Good 以上。上课投入、积极参与，是成绩背后的发动机。</div>
+        <div class="hl-text">P3 Term 1 各科态度评级 7A + 5B——从一年级的 8A4B 下滑，投入需要找回来。态度是成绩背后的发动机。</div>
       </div>
       <div class="hl-item">
         <div class="hl-icon" style="border-color:#A78BFA;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <div class="hl-title" style="color:#A78BFA;">四大素养全满分</div>
-        <div class="hl-text">精神品格、终身学习、协作沟通、批判性思维——12 项观察全部达到 Always 最高档。</div>
+        <div class="hl-text">精神品格、终身学习、协作沟通、批判性思维——12 项观察最近一次（P2 学年末）全部 Always 最高档，成长的底色依然扎实。</div>
       </div>
       <div class="hl-item">
         <div class="hl-icon" style="border-color:#4ADE80;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4ADE80" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
         <div class="hl-title" style="color:#4ADE80;">出勤记录</div>
-        <div class="hl-text">P1 学年 Term 1 与 Term 3 全勤（0缺勤0迟到）；期中段因故缺勤 7 天，依然保持高分——学习韧性可见一斑。</div>
+        <div class="hl-text">P3 Term 1 全勤（0缺勤0迟到）；P2 各学期缺勤仅 0–1 天，习惯稳定。身体是战斗的本钱。</div>
       </div>
     </div>
   </section>
@@ -1026,8 +1049,8 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
       老师的话 · 班主任评语
     </h2>
-    <p class="panel-sub" style="font-size:0.95rem; line-height:1.9; color:#B8C8E0;">"Alex displays a tremendous amount of his potential. His understanding of the material covered in class was admirable and this has allowed him to achieve good results with activities and assessments in class. Well done, Alex"</p>
-    <p class="panel-sub" style="color:var(--gold);">—— AL 展现了他的巨大潜力。他对课堂所学内容的理解令人赞叹，这让他在课堂活动和评估中都取得了优异成绩。做得好，Alex！</p>
+    <p class="panel-sub" style="font-size:0.95rem; line-height:1.9; color:#B8C8E0;">"AL demonstrates a solid understanding of his studies and has shown initiative by completing additional work at home. He enjoys social interactions and communicates confidently with both adults and his peers, often contributing to class discussions. His results this semester reflect his positive attitude toward learning, and I look forward to his continued progress in the next academic year."</p>
+    <p class="panel-sub" style="color:var(--gold);">（P2 二年级 · 学年末）—— AL 展现了扎实的学习理解力，还会主动在家完成额外学习。他乐于与人交往，面对大人和同伴都自信大方，经常参与课堂讨论。本学期的成绩反映了他积极的学习态度，期待他在下一学年继续进步。</p>
   </section>
   <!-- ===== Highlights ===== -->
   <section class="panel">
@@ -1060,7 +1083,7 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <p class="quote font-display">"你已经学会等别人说完啦，你已经学会控制自己的力量啦。继续发光吧，AL。"</p>
-  <p>ULTRA GROWTH RECORD · 幼儿园 2023—2024 · 小学 2024—2025 · 光之少年成长档案</p>
+  <p>ULTRA GROWTH RECORD · 幼儿园 2023—2024 · 小学 P1 2024—2025 · P2 2025—2026 · P3 2026—2027 · 光之少年成长档案</p>
 </footer>
 
 <script>
@@ -1105,24 +1128,36 @@ const timelineStories = [
 
 // ===== 小学数据（一年级 2024-25）=====
 const primaryTerms = [
-  { label: 'Term 1', time: '2024', title: '小学启程', data: [9.6, 9.7, 8.8, 8.5, 9.2, 8.9] },
-  { label: '期中', time: '2025', title: '全面开花', data: [9.6, 9.4, 9.0, 8.6, 9.0, 9.3] },
-  { label: 'Term 3', time: '2025', title: '巅峰之战', data: [9.9, 9.5, 8.9, 8.1, 9.4, 9.3] },
+  { grade: 'P1', label: 'Term 1', time: '2024-25', title: '第一学期', data: [9.6, 9.7, 8.8, 8.5, 9.2, 8.9] },
+  { grade: 'P1', label: 'Sem 1', time: '2024-25', title: '期中总评', data: [9.6, 9.4, 9.0, 8.6, 9.0, 9.3] },
+  { grade: 'P1', label: 'Term 3', time: '2024-25', title: '第三学期', data: [9.9, 9.5, 8.9, 8.1, 9.4, 9.3] },
+  { grade: 'P1', label: 'Sem 2', time: '2024-25', title: '学年末', data: [9.8, 9.5, 8.8, 8.2, 9.5, 9.3] },
+  { grade: 'P2', label: 'Term 1', time: '2025-26', title: '第一学期', data: [9.5, 9.7, 9.5, 9.2, 9.0, 9.4] },
+  { grade: 'P2', label: 'Sem 1', time: '2025-26', title: '期中总评', data: [9.3, 9.6, 9.4, 9.1, 9.0, 9.8] },
+  { grade: 'P2', label: 'Term 3', time: '2025-26', title: '第三学期', data: [9.3, 9.8, 9.4, 8.5, 9.1, 9.7] },
+  { grade: 'P2', label: 'Sem 2', time: '2025-26', title: '学年末', data: [9.6, 9.8, 9.3, 8.6, 9.1, 9.8] },
+  { grade: 'P3', label: 'Term 1', time: '2026-27', title: '当前战斗', data: [9.2, 9.3, 8.8, 8.4, 9.2, 9.4] },
 ];
 
 const primaryStories = [
-  { story: '数学98%×70% + 科学100%×30%——科学连续满分，数学接近满分。数理双王牌，稳稳的高地。', badge: '王牌角', trend: '9.6 → 9.9，数理双王牌' },
-  { story: '英语96%×40% + 普通话98%×35% + 印尼语89%×25%——按教学语言权重折算，三语全能依旧亮眼。', badge: '多语角', trend: '9.7 → 9.5，三语全能' },
-  { story: '艺术设计86% + 音乐91% 平均——从幼儿园的艺术种子长成小学的优雅之花。', badge: '优雅角', trend: '8.8 → 8.9，稳步发挥' },
-  { story: '体育81%——小学的新挑战。精力充沛的战士，身体还需要跟上脑子的速度。', badge: '修炼角', trend: '8.5 → 8.1，有待加强' },
-  { story: '品格97%×40% + 公民94%×30% + 全球视野90%×30%——四大素养全部满分加持，他是班里的榜样。', badge: '榜样角', trend: '9.2 → 9.4，素养全优' },
-  { story: '态度与参与度评级(8A4B)×70% + 数字素养92%×30%——从上课态度到数字素养都在稳步升级。', badge: '新星角', trend: '8.9 → 9.3，态度+数字素养' },
+  { story: '数学93%×70% + 科学90%×30%——数理角从一年级 9.9 回落到 9.2，三年级知识变深，正是重新修炼的好时机。', badge: '王牌角', trend: 'P1 9.6 → P3 9.2，数理回落需追赶' },
+  { story: '英语85%×40% + 普通话99%×35% + 印尼语96%×25%——普通话、印尼语稳住高位，英语 85 需要拉回 90+。', badge: '多语角', trend: 'P1 9.7 → P3 9.3，英语回落' },
+  { story: '艺术设计87% + 音乐88% 平均——三年级课程加深，艺术角平稳，向 90 冲刺。', badge: '优雅角', trend: 'P1 8.8 → P3 8.8，平稳待升' },
+  { story: '体育84%——依然是修炼角。精力充沛的小战士，把运动变成每天的快乐任务。', badge: '修炼角', trend: 'P1 8.5 → P3 8.4，稳步追赶' },
+  { story: '品格93%×40% + 公民93%×30% + 全球视野89%×30%——素养依旧稳固，班里的榜样。', badge: '榜样角', trend: 'P1 9.2 → P3 9.2，稳固' },
+  { story: '态度与参与度(7A5B)×70% + 数字素养99%×30%——数字素养满分级，态度需从 B 找回 A。', badge: '新星角', trend: 'P1 8.9 → P3 9.4，数字素养满分级' },
 ];
 
 const primaryTimelineStories = [
-  '小学 P1（一年级）第一学期。科学和普通话满分，全勤记录（0缺勤0迟到），全新科目大展身手。',
-  '老师盛赞"潜力巨大"，四大素养全部满分。本段缺勤7天但成绩依旧出色；数学应用题（Problem Solving）是下一个修炼目标。',
-  '科学连续满分、数学98%、英语96%、普通话98%，再度全勤。体育81%成为新的修炼方向。',
+  '一年级第一学期。科学和普通话满分，全勤（0缺0迟），全新科目大展身手。',
+  '一年级期中总评。老师盛赞"潜力巨大"，四大素养满分；缺勤7天仍保持高分。',
+  '一年级第三学期。科学连续满分、数学98%、英语96%、普通话98%，再度全勤；体育81成为修炼方向。',
+  '一年级学年末。英语93、数学97、普通话99、视野94，态度整体回升；缺勤3天。',
+  '二年级第一学期。音乐满分100、普通话100、品格99；体育92大幅进步；缺勤1天。',
+  '二年级期中总评。12科态度全部A！品格95、普通话99；老师赞"高阶思维能力很强"。',
+  '二年级第三学期。英语98、数学97、普通话100；科学85、视野81回落，成为新修炼点。',
+  '二年级学年末。普通话连续100，数学98、英语97；老师赞"主动完成额外作业"。',
+  '三年级第一学期（当前）。普通话99、数字素养99；数学93但态度B，英语85需要重点追赶。',
 ];
 
 const icons = {
@@ -1171,13 +1206,13 @@ terms.forEach((t, i) => {
 });
 
 // 追加小学时间线节点
-const primaryDotColors = ['#FFD700', '#00D4FF', '#FF6B9D'];
+const primaryDotColors = ['#FFD700','#00D4FF','#FF6B9D','#4ADE80','#FFB347','#A78BFA','#FF6B35','#00E5FF','#FF3838'];
 primaryTerms.forEach((t, i) => {
   const item = document.createElement('div');
   item.className = 'tl-item';
   item.innerHTML = `
     <div class="tl-dot" style="background:${primaryDotColors[i]}; color:${primaryDotColors[i]}; left:-31px"></div>
-    <div class="tl-term"><span style="color:var(--gold);">小学 P1</span> ${t.label}<span class="tl-title">${t.title}</span><span class="tl-time">${t.time}</span></div>
+    <div class="tl-term"><span style="color:var(--gold);">小学 ${t.grade}</span> ${t.label}<span class="tl-title">${t.title}</span><span class="tl-time">${t.time}</span></div>
     <div class="tl-desc">${primaryTimelineStories[i]}</div>
   `;
   tl.appendChild(item);
@@ -1186,11 +1221,28 @@ primaryTerms.forEach((t, i) => {
 // ===== 小学雷达图 =====
 const radarChartPrimary = echarts.init(document.getElementById('radar-chart-primary'));
 const navPrimary = document.getElementById('term-nav-primary');
-let primaryIdx = primaryTerms.length - 1;
+const gradeTabsPrimary = document.getElementById('grade-tabs-primary');
+const primaryGrades = ['P1', 'P2', 'P3'];
+const primaryGradeNames = { P1: '一年级', P2: '二年级', P3: '三年级' };
+let primaryGrade = 'P3';
+let primaryIdx = 0;
+
+function termsOfGrade(g) { return primaryTerms.filter(t => t.grade === g); }
+
+function renderGradeTabsPrimary() {
+  gradeTabsPrimary.innerHTML = '';
+  primaryGrades.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'grade-btn' + (g === primaryGrade ? ' active' : '');
+    btn.innerHTML = `${g}<span class="time">${primaryGradeNames[g]}</span>`;
+    btn.onclick = () => { primaryGrade = g; primaryIdx = 0; renderGradeTabsPrimary(); renderNavPrimary(); renderRadarPrimary(); };
+    gradeTabsPrimary.appendChild(btn);
+  });
+}
 
 function renderNavPrimary() {
   navPrimary.innerHTML = '';
-  primaryTerms.forEach((t, i) => {
+  termsOfGrade(primaryGrade).forEach((t, i) => {
     const btn = document.createElement('button');
     btn.className = 'term-btn' + (i === primaryIdx ? ' active' : '');
     btn.innerHTML = `${t.label}<span class="time">${t.title}</span>`;
@@ -1200,11 +1252,11 @@ function renderNavPrimary() {
 }
 
 function renderRadarPrimary() {
-  const t = primaryTerms[primaryIdx];
+  const t = termsOfGrade(primaryGrade)[primaryIdx];
   radarChartPrimary.setOption({
     tooltip: { trigger: 'item' },
     legend: {
-      data: ['起点（Term 1）', '当前（' + t.label + '·' + t.title + '）'],
+      data: ['起点（P1 Term 1）', '当前（' + t.grade + ' ' + t.label + '·' + t.title + '）'],
       bottom: 0,
       textStyle: { fontSize: 12, color: '#7A90B0' },
     },
@@ -1228,7 +1280,7 @@ function renderRadarPrimary() {
       data: [
         {
           value: primaryTerms[0].data,
-          name: '起点（Term 1）',
+          name: '起点（P1 Term 1）',
           lineStyle: { color: '#7A90B0', width: 2, type: 'dashed' },
           areaStyle: { color: 'rgba(122,144,176,0.1)' },
           itemStyle: { color: '#7A90B0' },
@@ -1245,7 +1297,7 @@ function renderRadarPrimary() {
       ],
     }],
   }, true);
-  document.getElementById('radar-total-primary').innerHTML = '小学六维总分 <b>' + t.data.reduce((a, b) => a + b, 0).toFixed(1) + '</b> / 60';
+  document.getElementById('radar-total-primary').innerHTML = t.grade + ' ' + t.label + ' 六维总分 <b>' + t.data.reduce((a, b) => a + b, 0).toFixed(1) + '</b> / 60';
 }
 
 // ===== 小学成长曲线 =====
@@ -1260,7 +1312,7 @@ curveChartPrimary.setOption({
   grid: { left: 40, right: 20, top: 20, bottom: 60 },
   xAxis: {
     type: 'category',
-    data: primaryTerms.map(t => t.label),
+    data: primaryTerms.map(t => t.grade + '·' + t.label),
     axisLine: { lineStyle: { color: 'rgba(255,215,0,0.3)' } },
     axisLabel: { color: '#7A90B0' },
   },
@@ -1405,6 +1457,7 @@ curveChart.setOption({
 
 renderNav();
 renderRadar();
+renderGradeTabsPrimary();
 renderNavPrimary();
 renderRadarPrimary();
 window.addEventListener('resize', () => { radarChart.resize(); curveChart.resize(); radarChartPrimary.resize(); curveChartPrimary.resize(); });
