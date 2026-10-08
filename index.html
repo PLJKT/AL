@@ -10,13 +10,11 @@
 <style>
   :root {
     --bg: #0A1628;
-    --bg2: #0D1F35;
     --panel: rgba(20, 40, 70, 0.6);
     --panel-border: rgba(0, 212, 255, 0.25);
     --cyan: #00D4FF;
     --red: #FF3838;
     --gold: #FFD700;
-    --silver: #E0E8F0;
     --text: #E8F0FF;
     --text-dim: #7A90B0;
     --c-math: #FFD700;
@@ -31,7 +29,7 @@
     font-family: 'Noto Sans SC', sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.6;
     overflow-x: hidden;
   }
   .font-display { font-family: 'ZCOOL KuaiLe', cursive; }
@@ -51,1032 +49,685 @@
     pointer-events: none;
     z-index: 0;
   }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 18px; position: relative; z-index: 1; }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-
-  /* ===== Hero ===== */
-  .hero {
-    text-align: center;
-    padding: 50px 20px 30px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-badge {
-    width: 80px; height: 80px;
-    margin: 0 auto 16px;
-    border-radius: 50%;
-    box-shadow: 0 0 30px rgba(0,212,255,0.5);
-  }
+  /* ===== Hero：大数字战斗力 ===== */
+  .hero { text-align: center; padding: 40px 20px 10px; position: relative; z-index: 1; }
+  .hero-badge { width: 76px; height: 76px; margin: 0 auto 12px; border-radius: 50%; box-shadow: 0 0 30px rgba(0,212,255,0.5); }
   .hero-badge img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-  .hero h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    letter-spacing: 3px;
-    background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .hero-title { font-size: 2.1rem; color: var(--gold); text-shadow: 0 0 18px rgba(255,215,0,0.4); }
+  .hero-sub { color: var(--text-dim); font-size: 0.9rem; letter-spacing: 3px; margin-top: 2px; }
+  .hero-img img { height: 210px; border-radius: 18px; margin: 14px 0 6px; box-shadow: 0 0 30px rgba(0,212,255,0.25); }
+  .power-num { font-size: 4.4rem; color: var(--gold); text-shadow: 0 0 30px rgba(255,215,0,0.5); line-height: 1.1; }
+  .power-num small { font-size: 1.5rem; color: var(--text-dim); }
+  .power-sub { color: var(--text-dim); font-size: 0.85rem; letter-spacing: 2px; }
+  .hero-stats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .stat-chip {
+    padding: 6px 14px; border-radius: 999px; font-size: 0.82rem;
+    border: 1px solid rgba(0,212,255,0.35); color: #B8C8E0; background: rgba(0,212,255,0.08);
   }
-  .hero .subtitle {
-    color: var(--cyan);
-    font-size: 1.1rem;
-    letter-spacing: 4px;
-    margin-top: 4px;
-  }
-  .hero .hero-img {
-    width: 220px;
-    margin: 24px auto 0;
-    display: block;
-    filter: drop-shadow(0 0 20px rgba(0,212,255,0.4));
-  }
-  .hero .hero-img img { width: 100%; border-radius: 12px; }
-  .hero .power-level {
-    margin-top: 16px;
-    font-size: 1.3rem;
-    color: var(--gold);
-    font-weight: 700;
-    letter-spacing: 2px;
-  }
+  .stat-chip b { color: var(--gold); font-size: 0.95rem; }
 
-  /* ===== Panel ===== */
+  /* ===== 面板 ===== */
   .panel {
     background: var(--panel);
     border: 1px solid var(--panel-border);
-    border-radius: 16px;
-    padding: 28px 24px;
-    margin: 24px auto;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 30px rgba(0,212,255,0.08);
+    border-radius: 22px;
+    padding: 26px 22px;
+    margin: 26px 0;
+    backdrop-filter: blur(4px);
   }
   .panel-title {
-    font-size: 1.3rem;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 1.5rem;
+    color: var(--text);
+    display: flex; align-items: center; gap: 8px;
     margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--cyan);
   }
-  .panel-sub {
-    color: var(--text-dim);
-    font-size: 0.88rem;
-    margin-bottom: 20px;
-  }
+  .panel-title.center { justify-content: center; }
+  .panel-note { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 14px; }
 
-  /* ===== Radar ===== */
-  #radar-chart { width: 100%; height: 500px; }
-  #radar-chart-primary { width: 100%; height: 500px; }
-
-  .term-nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
-  .term-btn {
-    padding: 8px 16px;
-    border: 1.5px solid rgba(0,212,255,0.3);
-    border-radius: 8px;
-    background: transparent;
-    color: var(--text-dim);
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-family: 'Noto Sans SC', sans-serif;
-    transition: all 0.25s;
-    text-align: center;
-  }
-  .term-btn:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px rgba(0,212,255,0.3); }
-  .term-btn.active {
-    background: linear-gradient(135deg, var(--cyan), #0099CC);
-    border-color: var(--cyan);
-    color: #0A1628;
-    font-weight: 700;
-    box-shadow: 0 0 16px rgba(0,212,255,0.5);
-  }
-  .term-btn .time { font-size: 0.75rem; opacity: 0.8; display: block; }
-
-  /* ===== Growth Curve ===== */
-  #curve-chart { width: 100%; height: 380px; }
-  #curve-chart-primary { width: 100%; height: 380px; }
-  .radar-total { text-align: center; margin-top: 14px; font-size: 0.92rem; color: #7A90B0; letter-spacing: 1px; }
-  .radar-total b { color: #FFD700; font-size: 1.3rem; font-family: 'ZCOOL KuaiLe', cursive; margin: 0 4px; }
-  .grade-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  /* ===== 年级 + 学期切换 ===== */
+  .grade-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
   .grade-btn {
-    padding: 8px 20px;
-    border: 1.5px solid rgba(255,215,0,0.35);
-    border-radius: 8px;
+    padding: 10px 26px;
+    border: 2px solid rgba(255,215,0,0.35);
+    border-radius: 12px;
     background: transparent;
     color: var(--text-dim);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     font-family: 'ZCOOL KuaiLe', cursive;
     transition: all 0.25s;
     text-align: center;
   }
-  .grade-btn:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+  .grade-btn:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(255,215,0,0.3); }
   .grade-btn.active {
     background: linear-gradient(135deg, var(--gold), #E6B800);
     border-color: var(--gold);
     color: #0A1628;
-    box-shadow: 0 0 16px rgba(255,215,0,0.5);
+    box-shadow: 0 0 18px rgba(255,215,0,0.5);
   }
   .grade-btn .time { font-size: 0.72rem; opacity: 0.85; display: block; font-family: 'Noto Sans SC', sans-serif; font-weight: 400; }
+  .term-nav { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .term-btn {
+    padding: 6px 14px;
+    border: 1.5px solid rgba(0,212,255,0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .term-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .term-btn.active { background: rgba(0,212,255,0.15); border-color: var(--cyan); color: var(--cyan); }
+  .term-btn .time { font-size: 0.66rem; opacity: 0.8; display: block; }
 
-  /* ===== Dimension Cards ===== */
-  .dim-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
+  /* 六边形战力大数字 */
+  .radar-wrap { text-align: center; }
+  #radar-chart-primary, #radar-chart { height: 520px; }
+  .radar-total { font-size: 2.6rem; color: var(--gold); font-family: 'ZCOOL KuaiLe', cursive; margin-top: 4px; }
+  .radar-total small { font-size: 1rem; color: var(--text-dim); font-family: 'Noto Sans SC', sans-serif; }
+  .radar-cap { color: var(--text-dim); font-size: 0.82rem; }
+
+  /* ===== 六大能力大卡 ===== */
+  .dim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .dim-card {
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 14px;
-    padding: 20px;
-    border-left: 4px solid;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .dim-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 24px rgba(0,212,255,0.15);
-  }
-  .dim-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .dim-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    border: 1.5px solid;
-  }
-  .dim-icon svg { width: 24px; height: 24px; }
-  .dim-name { font-size: 1.05rem; font-weight: 700; }
-  .dim-score {
-    margin-left: auto;
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-family: 'ZCOOL KuaiLe', cursive;
-  }
-  .dim-bar {
-    height: 6px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 3px;
-    margin: 10px 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px 16px 14px;
+    background: rgba(255,255,255,0.03);
+    position: relative;
     overflow: hidden;
   }
-  .dim-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.6s;
-  }
-  .dim-trend {
-    font-size: 0.82rem;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-  }
-  .dim-story {
-    font-size: 0.85rem;
-    line-height: 1.7;
-    color: #B8C8E0;
-  }
-  .dim-badge {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border: 1px solid;
-  }
+  .dim-head { display: flex; align-items: center; gap: 8px; }
+  .dim-icon { width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid; display: flex; align-items: center; justify-content: center; flex: none; }
+  .dim-icon svg { width: 20px; height: 20px; }
+  .dim-name { font-size: 1rem; font-weight: 700; flex: 1; }
+  .dim-score { font-size: 2.3rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; line-height: 1.1; }
+  .dim-score small { font-size: 0.85rem; color: var(--text-dim); font-family: 'Noto Sans SC', sans-serif; font-weight: 400; }
+  .dim-bar { height: 12px; background: rgba(255,255,255,0.08); border-radius: 999px; margin: 10px 0 6px; overflow: hidden; }
+  .dim-bar-fill { height: 100%; border-radius: 999px; transition: width 0.6s; }
+  .dim-note { font-size: 0.8rem; color: #B8C8E0; }
 
-  /* ===== Timeline ===== */
-  .timeline {
-    position: relative;
-    padding-left: 36px;
+  /* ===== 技能卡 ===== */
+  .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .skill-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
   }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 12px; top: 8px; bottom: 8px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--c-math), var(--c-lang), var(--c-art), var(--c-phys), var(--c-social), var(--c-focus), var(--gold));
-    border-radius: 1px;
-  }
-  .tl-item { position: relative; margin-bottom: 24px; }
-  .tl-dot {
-    position: absolute;
-    left: -30px; top: 6px;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 10px currentColor;
-  }
-  .tl-term { font-weight: 700; font-size: 1.05rem; }
-  .tl-title {
-    color: var(--gold);
-    font-size: 0.9rem;
-    margin-left: 8px;
-  }
-  .tl-time { color: var(--text-dim); font-size: 0.82rem; margin-left: 8px; }
-  .tl-desc { font-size: 0.88rem; color: #B8C8E0; margin-top: 4px; }
+  .skill-head { display: flex; align-items: center; gap: 10px; }
+  .skill-icon { width: 40px; height: 40px; border-radius: 12px; border: 1.5px solid; display: flex; align-items: center; justify-content: center; flex: none; }
+  .skill-icon svg { width: 24px; height: 24px; }
+  .skill-name { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .skill-lv { font-size: 0.8rem; color: var(--text-dim); }
+  .skill-score { font-size: 2rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; margin-top: 4px; }
+  .skill-score small { font-size: 0.8rem; color: var(--text-dim); font-family: 'Noto Sans SC', sans-serif; font-weight: 400; }
+  .skill-bar { height: 10px; background: rgba(255,255,255,0.08); border-radius: 999px; margin: 8px 0 10px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 999px; }
+  .skill-tag { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: 999px; margin: 2px 2px 2px 0; border: 1px solid rgba(255,255,255,0.18); color: #B8C8E0; }
+  .skill-tag.unlocked { border-color: rgba(255,215,0,0.5); color: var(--gold); }
+  .skill-next { font-size: 0.78rem; color: var(--text-dim); margin-top: 8px; }
 
-  /* ===== Highlights ===== */
-  .hl-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .hl-item {
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
+  /* ===== 目标面板（孩子向） ===== */
+  .goal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .goal-card {
     border-radius: 14px;
-    padding: 24px;
+    padding: 12px 12px 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
     text-align: center;
   }
-  .hl-item .hl-icon {
-    width: 56px; height: 56px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid;
+  .goal-card.ok { border-color: rgba(74,222,128,0.5); background: rgba(74,222,128,0.06); }
+  .goal-card.warn { border-color: rgba(255,215,0,0.5); background: rgba(255,215,0,0.05); }
+  .goal-card.fail { border-color: rgba(255,56,56,0.5); background: rgba(255,56,56,0.06); }
+  .goal-status { width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; }
+  .goal-status svg { width: 16px; height: 16px; }
+  .goal-status.ok { background: rgba(74,222,128,0.2); color: #4ADE80; }
+  .goal-status.warn { background: rgba(255,215,0,0.2); color: #FFD700; }
+  .goal-status.fail { background: rgba(255,56,56,0.2); color: #FF3838; }
+  .goal-name { font-size: 0.9rem; font-weight: 700; }
+  .goal-score { font-size: 1.7rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; line-height: 1.2; }
+  .goal-score small { font-size: 0.7rem; color: var(--text-dim); font-family: 'Noto Sans SC', sans-serif; font-weight: 400; }
+  .goal-att { font-size: 0.72rem; color: var(--text-dim); }
+  .goal-note { font-size: 0.74rem; color: #B8C8E0; margin-top: 4px; min-height: 2.2em; }
+  .goal-sum { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 14px 0 2px; }
+  .goal-sum-chip { padding: 6px 14px; border-radius: 999px; font-size: 0.82rem; border: 1px solid rgba(255,255,255,0.15); color: #B8C8E0; }
+  .goal-sum-chip b { font-size: 1rem; }
+  .goal-sum-chip.g { color: #4ADE80; border-color: rgba(74,222,128,0.4); }
+  .goal-sum-chip.y { color: #FFD700; border-color: rgba(255,215,0,0.4); }
+  .goal-sum-chip.r { color: #FF3838; border-color: rgba(255,56,56,0.4); }
+
+  /* ===== 成长曲线 ===== */
+  #curve-chart-primary { height: 400px; }
+
+  /* ===== 时间线 ===== */
+  .timeline { display: flex; flex-direction: column; gap: 0; padding-left: 0; }
+  .tl-row { display: grid; grid-template-columns: 210px 40px 1fr; align-items: center; padding: 6px 0; }
+  .tl-term { font-weight: 700; font-size: 0.95rem; color: var(--gold); text-align: right; padding-right: 8px; }
+  .tl-term .tl-title { display: block; font-size: 0.72rem; color: var(--text-dim); font-weight: 400; }
+  .tl-track { display: flex; justify-content: center; position: relative; }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+  .tl-line { position: absolute; top: 14px; width: 2px; height: calc(100% - 6px); background: rgba(255,255,255,0.12); }
+  .tl-desc { font-size: 0.82rem; color: #B8C8E0; padding-left: 10px; }
+
+  /* ===== 家长进阶区 ===== */
+  details.parenthub {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 22px;
+    padding: 0;
+    margin: 26px 0;
+    overflow: hidden;
   }
-  .hl-item .hl-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
-  .hl-item .hl-text { font-size: 0.85rem; color: var(--text-dim); }
+  details.parenthub summary {
+    cursor: pointer;
+    padding: 18px 22px;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 1.15rem;
+    color: var(--cyan);
+    list-style: none;
+    display: flex;
+    align-items: center; gap: 8px;
+    user-select: none;
+  }
+  details.parenthub summary::-webkit-details-marker { display: none; }
+  details.parenthub summary::after { content: '▼'; font-size: 0.8rem; color: var(--text-dim); margin-left: auto; }
+  details.parenthub[open] summary::after { content: '▲'; }
+  .hub-inner { padding: 6px 22px 24px; border-top: 1px dashed rgba(255,255,255,0.12); }
+
+  .subj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+  .subj-card { border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px; background: rgba(255,255,255,0.03); border-top-width: 3px; border-top-style: solid; }
+  .subj-head { display: flex; align-items: baseline; gap: 6px; }
+  .subj-name { font-weight: 700; font-size: 1rem; flex: 1; }
+  .subj-status { font-size: 0.7rem; padding: 1px 7px; border-radius: 999px; }
+  .subj-pct { font-size: 1.1rem; font-weight: 900; }
+  .subj-review { font-size: 0.8rem; color: #B8C8E0; margin: 8px 0; }
+  .subj-path-title { font-size: 0.78rem; color: var(--cyan); margin-bottom: 4px; }
+  .subj-path ul { padding-left: 18px; }
+  .subj-path li { font-size: 0.78rem; color: #B8C8E0; margin-bottom: 2px; }
+  .subj-goal { font-size: 0.82rem; color: var(--gold); margin-top: 8px; }
+
+  .hl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .hl-item { border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 12px; background: rgba(255,255,255,0.03); }
+  .hl-icon { width: 38px; height: 38px; border-radius: 10px; border: 1.5px solid; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+  .hl-title { font-weight: 700; font-size: 0.95rem; }
+  .hl-text { font-size: 0.8rem; color: #B8C8E0; margin-top: 4px; }
+
+  .comment-en { font-size: 0.9rem; line-height: 1.9; color: #B8C8E0; }
+  .comment-zh { color: var(--gold); font-size: 0.92rem; margin-top: 8px; }
+  .hub-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 18px; line-height: 1.9; }
 
   /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 40px 20px 50px;
-    color: var(--text-dim);
-  }
-  .footer .quote {
-    font-size: 1.15rem;
-    color: var(--gold);
-    max-width: 480px;
-    margin: 0 auto 12px;
-  }
+  .footer { text-align: center; padding: 26px 20px 34px; color: var(--text-dim); font-size: 0.82rem; }
+  .footer .quote { color: var(--gold); font-size: 1.1rem; margin-bottom: 8px; }
 
-  /* ===== Extra Skills ===== */
-  .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .skill-card {
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 14px;
-    padding: 22px;
-    text-align: center;
-    position: relative;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .skill-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    background: radial-gradient(circle at 50% 0%, var(--skill-color, #00D4FF) 0%, transparent 70%);
-    opacity: 0.08;
-    pointer-events: none;
-  }
-  .skill-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 24px var(--skill-glow, rgba(0,212,255,0.2));
-  }
-  .skill-icon-wrap {
-    width: 64px; height: 64px;
-    margin: 0 auto 12px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--skill-color, #00D4FF);
-    background: rgba(10, 22, 40, 0.6);
-    box-shadow: 0 0 16px var(--skill-glow, rgba(0,212,255,0.3));
-  }
-  .skill-icon-wrap svg { width: 32px; height: 32px; }
-  .skill-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
-  .skill-type {
-    font-size: 0.78rem;
-    color: var(--text-dim);
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-  }
-  .skill-level-badge {
-    display: inline-block;
-    padding: 3px 14px;
-    border-radius: 12px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    border: 1px solid var(--skill-color, #00D4FF);
-    color: var(--skill-color, #00D4FF);
-    margin-bottom: 12px;
-  }
-  .xp-bar {
-    height: 8px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 4px;
-  }
-  .xp-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: var(--skill-color, #00D4FF);
-    box-shadow: 0 0 8px var(--skill-glow, rgba(0,212,255,0.5));
-    transition: width 0.8s;
-  }
-  .xp-text {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    margin-bottom: 16px;
-  }
-  .ult-section {
-    text-align: left;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 12px;
-  }
-  .ult-label {
-    font-size: 0.75rem;
-    color: var(--gold);
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .ult-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    font-size: 0.85rem;
-  }
-  .ult-item .ult-icon {
-    width: 28px; height: 28px;
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .ult-item.unlocked .ult-icon {
-    background: var(--skill-color, #00D4FF);
-    box-shadow: 0 0 10px var(--skill-glow, rgba(0,212,255,0.4));
-  }
-  .ult-item.unlocked .ult-icon svg { width: 16px; height: 16px; }
-  .ult-item.locked { opacity: 0.4; }
-  .ult-item.locked .ult-icon {
-    background: rgba(255,255,255,0.1);
-  }
-  .ult-item.locked .ult-icon svg { width: 14px; height: 14px; stroke: #7A90B0; }
-  .ult-name { color: var(--text); }
-  .ult-lock { font-size: 0.72rem; color: var(--text-dim); margin-left: auto; }
-  .milestone-tag {
-    font-size: 0.62rem;
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-  }
-  .tag-ult { background: rgba(255,215,0,0.2); color: #FFD700; }
-  .tag-equip { background: rgba(0,212,255,0.2); color: #00D4FF; }
-  .tag-title { background: rgba(167,139,250,0.2); color: #A78BFA; }
-
-  /* ===== Subject Quest ===== */
-  .subj-card {
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 14px;
-    padding: 18px;
-    border-top: 4px solid;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .subj-card:hover { transform: translateY(-4px); box-shadow: 0 0 24px rgba(255,215,0,0.12); }
-  .subj-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .subj-name { font-size: 1.05rem; font-weight: 700; }
-  .subj-pct { margin-left: auto; font-size: 1.3rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; }
-  .subj-status { font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
-  .subj-review { font-size: 0.85rem; color: #B8C8E0; margin-bottom: 10px; line-height: 1.7; }
-  .subj-path { border-top: 1px dashed rgba(255,255,255,0.12); padding-top: 8px; margin-bottom: 8px; }
-  .subj-path-title { font-size: 0.72rem; color: #00D4FF; letter-spacing: 1px; margin-bottom: 4px; }
-  .subj-path ul { list-style: none; padding: 0; margin: 0; }
-  .subj-path li { font-size: 0.8rem; color: #9FB4D4; padding: 2px 0 2px 14px; position: relative; }
-  .subj-path li::before { content: '\2022'; position: absolute; left: 0; color: #00D4FF; }
-  .subj-goal { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); border-radius: 8px; padding: 8px 10px; font-size: 0.8rem; color: #FFD700; line-height: 1.6; }
-
-  /* ===== Standard Check ===== */
-  .stand-stats { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
-  .stand-stat { flex: 1; min-width: 140px; text-align: center; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--panel-border); background: var(--panel); }
-  .stand-stat .num { font-size: 1.6rem; font-weight: 900; font-family: 'ZCOOL KuaiLe', cursive; line-height: 1.2; }
-  .stand-stat .lbl { font-size: 0.78rem; color: var(--text-dim); }
-  .stand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .stand-card { background: var(--panel); border: 1px solid var(--panel-border); border-radius: 12px; padding: 14px; border-left: 4px solid; }
-  .stand-head { display: flex; align-items: center; gap: 8px; }
-  .stand-name { font-weight: 700; font-size: 0.95rem; }
-  .stand-pct { margin-left: auto; font-weight: 900; font-size: 1.15rem; font-family: 'ZCOOL KuaiLe', cursive; }
-  .stand-att { font-size: 0.75rem; color: var(--text-dim); background: rgba(255,255,255,0.08); padding: 1px 7px; border-radius: 8px; }
-  .stand-badge { font-size: 0.7rem; padding: 2px 9px; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
-  .stand-note { font-size: 0.8rem; color: #9FB4D4; margin-top: 6px; line-height: 1.6; }
-  .stand-note.ok { color: #8FD8B0; }
-
-  /* ===== Responsive ===== */
+  /* ===== 响应式 ===== */
   @media (max-width: 860px) {
-    .dim-grid { grid-template-columns: repeat(2, 1fr); }
+    .dim-grid, .skill-grid, .subj-grid { grid-template-columns: repeat(2, 1fr); }
+    .goal-grid { grid-template-columns: repeat(3, 1fr); }
     .hl-grid { grid-template-columns: 1fr; }
-    .skill-grid { grid-template-columns: 1fr; }
-    .stand-grid { grid-template-columns: repeat(2, 1fr); }
-    #radar-chart { height: 420px; }
-    #curve-chart { height: 320px; }
-    #radar-chart-primary { height: 420px; }
-    #curve-chart-primary { height: 320px; }
+    #radar-chart-primary, #radar-chart { height: 440px; }
+    .power-num { font-size: 3.2rem; }
   }
   @media (max-width: 540px) {
-    .dim-grid { grid-template-columns: 1fr; }
-    .stand-grid { grid-template-columns: 1fr; }
-    .hero { padding: 30px 16px 20px; }
-    .panel { padding: 18px 14px; }
-    #radar-chart { height: 380px; }
-    #radar-chart-primary { height: 380px; }
-    .hero .hero-img { width: 180px; }
+    .dim-grid, .skill-grid, .goal-grid, .subj-grid { grid-template-columns: 1fr; }
+    #radar-chart-primary, #radar-chart { height: 380px; }
+    .tl-row { grid-template-columns: 150px 30px 1fr; }
+    .hero-img img { height: 160px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ===== Hero ===== -->
+<!-- ===== Hero：一眼看到的大数字 ===== -->
 <header class="hero">
   <div class="hero-badge"><img src="assets/badge.png" alt="badge"></div>
-  <h1 class="font-display">AL 战斗成长档案</h1>
-  <div class="subtitle">ULTRA GROWTH REPORT</div>
+  <h1 class="hero-title font-display">AL 光之少年</h1>
+  <div class="hero-sub">ULTRA GROWTH REPORT · P3 三年级 2026-27</div>
   <div class="hero-img"><img src="assets/hero.png" alt="AL"></div>
-  <div class="power-level">综合战斗力 61.3 / 75 <span style="font-size:0.85rem; color:var(--text-dim);">(小学六维54.3 + 额外技能7/15)</span></div>
+  <div class="power-num font-display">81.7<small>/100</small></div>
+  <div class="power-sub">综合战斗力</div>
+  <div class="hero-stats">
+    <span class="stat-chip">六边形战力 <b>90.5</b></span>
+    <span class="stat-chip">技能战力 <b>46.7</b></span>
+    <span class="stat-chip">目标达标 <b>5/12</b></span>
+  </div>
 </header>
 
 <div class="container">
 
-  <!-- ===== Radar ===== -->
+  <!-- ===== 1. 我的六边形 ===== -->
   <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polygon points="12,2 22,8.5 18,20 6,20 2,8.5"/></svg>
-      幼儿园时期 · 六维能力雷达图
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><polygon points="12,2 22,8.5 18,20 6,20 2,8.5"/></svg>
+      我的六边形能力
     </h2>
-    <p class="panel-sub">点击下方按钮切换战斗时期，看 AL 的能力六边形如何一路进化。虚线是起点，实线是当前。</p>
-    <div id="radar-chart"></div>
-    <div class="radar-total" id="radar-total"></div>
-    <div class="term-nav" id="term-nav"></div>
-  </section>
-
-  <!-- ===== Growth Curve ===== -->
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
-      幼儿园成长能量曲线
-    </h2>
-    <p class="panel-sub">七个学期，六个维度的战斗力变化轨迹。每条线都是一次升级记录。</p>
-    <div id="curve-chart"></div>
-  </section>
-
-  <!-- ===== Dimension Cards ===== -->
-  <h2 class="panel-title" style="margin-top:40px; margin-bottom:4px;">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    幼儿园战斗属性面板
-  </h2>
-  <p class="panel-sub">每个属性都在升级，没有弱角，只有还没发光的地方。</p>
-
-  <div class="dim-grid" id="dim-grid"></div>
-
-  <!-- ===== Extra Skills ===== -->
-  <h2 class="panel-title" style="margin-top:40px; margin-bottom:4px;">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2 5h5l-4 3.5 1.5 5.5L12 13l-4.5 3 1.5-5.5L5 7h5z"/></svg>
-    额外技能 EXTRA SKILLS
-  </h2>
-  <p class="panel-sub">课堂之外修炼的超能力，升级就能解锁新绝招。等级继承幼儿园修炼成果，每完成一个年级 +1 级（已加成：P1、P2 两个年级；当前在读 P3 三年级第一学期）。</p>
-
-  <div class="skill-grid">
-
-    <!-- 足球 -->
-    <div class="skill-card" style="--skill-color:#4ADE80; --skill-glow:rgba(74,222,128,0.3);">
-      <div class="skill-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2l3 5-3 5-3-5z"/><path d="M2 12l5-1 3 4-3 5z"/><path d="M22 12l-5-1-3 4 3 5z"/><path d="M7 22l5-3 5 3"/></svg>
-      </div>
-      <div class="skill-name">足球</div>
-      <div class="skill-type">运动系 · 关联体能运动</div>
-      <div class="skill-level-badge">Lv.6 / 10 · 3/5分</div>
-      <div class="xp-bar"><div class="xp-fill" style="width:60%"></div></div>
-      <div class="xp-text">总进度 60% · 已解锁「圆月弯刀任意球」</div>
-      <div class="ult-section">
-        <div class="ult-label">成 长 里 程 碑</div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></div>
-          <span class="ult-name">黄金右脚射门</span>
-        </div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg></div>
-          <span class="ult-name">团队之光传球</span>
-        </div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-equip">装备</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">光之足球</span>
-        </div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">圆月弯刀任意球</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-title">称号</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">足球之星</span>
-          <span class="ult-lock">Lv.10</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 钢琴 -->
-    <div class="skill-card" style="--skill-color:#A78BFA; --skill-glow:rgba(167,139,250,0.3);">
-      <div class="skill-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="6" x2="7" y2="18"/><line x1="11" y1="6" x2="11" y2="18"/><line x1="15" y1="6" x2="15" y2="18"/><line x1="19" y1="6" x2="19" y2="18"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      </div>
-      <div class="skill-name">钢琴</div>
-      <div class="skill-type">艺术系 · 关联艺术审美</div>
-      <div class="skill-level-badge">Lv.4 / 10 · 2/5分</div>
-      <div class="xp-bar"><div class="xp-fill" style="width:40%"></div></div>
-      <div class="xp-text">总进度 40% · 再升1级解锁装备</div>
-      <div class="ult-section">
-        <div class="ult-label">成 长 里 程 碑</div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <span class="ult-name">旋律之光演奏</span>
-        </div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">节奏大师共鸣</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-equip">装备</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">星光琴键</span>
-          <span class="ult-lock">Lv.5</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">双手合璧琶音</span>
-          <span class="ult-lock">Lv.6</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-title">称号</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">旋律大师</span>
-          <span class="ult-lock">Lv.10</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 篮球 -->
-    <div class="skill-card" style="--skill-color:#FF6B35; --skill-glow:rgba(255,107,53,0.3);">
-      <div class="skill-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/><path d="M5 5l14 14"/><path d="M19 5L5 19"/></svg>
-      </div>
-      <div class="skill-name">篮球</div>
-      <div class="skill-type">运动系 · 关联体能运动</div>
-      <div class="skill-level-badge">Lv.4 / 10 · 2/5分</div>
-      <div class="xp-bar"><div class="xp-fill" style="width:40%"></div></div>
-      <div class="xp-text">总进度 40% · 再升1级解锁装备</div>
-      <div class="ult-section">
-        <div class="ult-label">成 长 里 程 碑</div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div>
-          <span class="ult-name">闪电运球</span>
-        </div>
-        <div class="ult-item unlocked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A1628" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">跳跃上篮</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-equip">装备</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">雷霆战靴</span>
-          <span class="ult-lock">Lv.5</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-ult">绝招</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">神准三分球</span>
-          <span class="ult-lock">Lv.6</span>
-        </div>
-        <div class="ult-item locked">
-          <span class="milestone-tag tag-title">称号</span>
-          <div class="ult-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-          <span class="ult-name">篮球之魂</span>
-          <span class="ult-lock">Lv.10</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ===== Timeline ===== -->
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-      战斗记录
-    </h2>
-    <p class="panel-sub">从幼儿园到小学，十场战斗，每一场都在变强。</p>
-    <div class="timeline" id="timeline"></div>
-  </section>
-
-  <!-- ===== Primary Section ===== -->
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2.8 3.5L12 2l-2.8 3.5M12 2v6M4 6l3 3-3-3m16 0l-3 3 3-3M12 9l2 5 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/></svg>
-      小学时期 PRIMARY
-    </h2>
-    <p class="panel-sub">三份学年报告，从一年级一路打到三年级：P1（Grade 1 · 2024-25）→ P2（Grade 2 · 2025-26）→ P3（Grade 3 · 2026-27，当前）。每份学年按 Term 与 Semester 记录成长；Grade 1 = P1 = 一年级，依此类推。新战场、新科目（科学、数字素养、公民教育、印尼语……），六边形继续进化。</p>
-    <div id="radar-chart-primary"></div>
-    <div class="radar-total" id="radar-total-primary"></div>
+    <p class="panel-note" style="text-align:center;">六个能力角，每个满分 100 分。点下面的按钮，看看不同年级的我。</p>
     <div class="grade-tabs" id="grade-tabs-primary"></div>
-    <div class="term-nav" id="term-nav-primary"></div>
+    <div class="radar-wrap">
+      <div id="radar-chart-primary"></div>
+      <div class="radar-total font-display" id="radar-total-primary">--<small>/100</small></div>
+      <div class="radar-cap">六边形战力 = 六个角的平均分</div>
+    </div>
+    <div class="term-nav" id="term-nav-primary" style="margin-top:10px;"></div>
   </section>
 
+  <!-- ===== 2. 六大能力 ===== -->
   <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
-      小学成长能量曲线
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg>
+      我的六大能力
     </h2>
-    <p class="panel-sub">九个节点 × 六大属性：从 P1 Term 1 一路打到 P3 Term 1（当前战斗），看六边形的进化轨迹。</p>
+    <p class="panel-note" style="text-align:center;">P3 三年级 · 当前战斗。每个能力满分 100 分。</p>
+    <div class="dim-grid" id="dim-grid-primary"></div>
+  </section>
+
+  <!-- ===== 3. 我的技能 ===== -->
+  <section class="panel">
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      我的技能
+    </h2>
+    <p class="panel-note" style="text-align:center;">课堂之外的超能力。每 2 级 = 20 分，练到 10 级就满分 100！</p>
+    <div class="skill-grid">
+
+      <div class="skill-card" style="border-top:3px solid #FFD700;">
+        <div class="skill-head">
+          <div class="skill-icon" style="border-color:#FFD700; color:#FFD700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div class="skill-name">足球</div>
+          <div class="skill-lv">Lv.6</div>
+        </div>
+        <div class="skill-score">60<small>/100</small></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:60%; background:linear-gradient(90deg,#FFD700,#E6B800);"></div></div>
+        <div>
+          <span class="skill-tag unlocked">黄金右脚射门</span>
+          <span class="skill-tag unlocked">团队之光传球</span>
+          <span class="skill-tag unlocked">光之足球</span>
+          <span class="skill-tag unlocked">圆月弯刀任意球</span>
+        </div>
+        <div class="skill-next">下一关：Lv.10 称号「足球之星」</div>
+      </div>
+
+      <div class="skill-card" style="border-top:3px solid #FF6B9D;">
+        <div class="skill-head">
+          <div class="skill-icon" style="border-color:#FF6B9D; color:#FF6B9D;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="4" height="10" rx="1"/><rect x="17" y="8" width="4" height="10" rx="1"/><path d="M7 13h10"/></svg></div>
+          <div class="skill-name">钢琴</div>
+          <div class="skill-lv">Lv.4</div>
+        </div>
+        <div class="skill-score">40<small>/100</small></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:40%; background:linear-gradient(90deg,#FF6B9D,#E8487A);"></div></div>
+        <div>
+          <span class="skill-tag unlocked">旋律之光演奏</span>
+          <span class="skill-tag unlocked">节奏大师共鸣</span>
+        </div>
+        <div class="skill-next">下一关：Lv.5 装备「星光琴键」</div>
+      </div>
+
+      <div class="skill-card" style="border-top:3px solid #FF6B35;">
+        <div class="skill-head">
+          <div class="skill-icon" style="border-color:#FF6B35; color:#FF6B35;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12l3 2M12 4v3"/></svg></div>
+          <div class="skill-name">篮球</div>
+          <div class="skill-lv">Lv.4</div>
+        </div>
+        <div class="skill-score">40<small>/100</small></div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:40%; background:linear-gradient(90deg,#FF6B35,#E8481E);"></div></div>
+        <div>
+          <span class="skill-tag unlocked">闪电运球</span>
+          <span class="skill-tag unlocked">跳跃上篮</span>
+        </div>
+        <div class="skill-next">下一关：Lv.5 装备「雷霆战靴」</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 4. 我的目标 ===== -->
+  <section class="panel">
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17v.5"/></svg>
+      我的目标
+    </h2>
+    <p class="panel-note" style="text-align:center;">每一科：分数 ≥ 90 + 态度 A = 达标。绿灯越多，AL 越强！</p>
+    <div class="goal-grid">
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">数学</div>
+        <div class="goal-score">93<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">分数 OK！态度回到 A 就完美。</div>
+      </div>
+
+      <div class="goal-card ok">
+        <div class="goal-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+        <div class="goal-name">科学</div>
+        <div class="goal-score">90<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">90 达标！守住阵地！</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">英语</div>
+        <div class="goal-score">85<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">再 +5 分就达标！每天朗读 20 分钟。</div>
+      </div>
+
+      <div class="goal-card ok">
+        <div class="goal-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+        <div class="goal-name">普通话</div>
+        <div class="goal-score">99<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">王牌！保持高位！</div>
+      </div>
+
+      <div class="goal-card ok">
+        <div class="goal-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+        <div class="goal-name">印尼语</div>
+        <div class="goal-score">96<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">优秀！把印尼语用进生活。</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">体育</div>
+        <div class="goal-score">84<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">动起来！每周 3 次运动 + 态度 A。</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">数字素养</div>
+        <div class="goal-score">99<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">99 分！态度 A 就完美！</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">艺术设计</div>
+        <div class="goal-score">87<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">多画 1 幅，冲 90！</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">音乐</div>
+        <div class="goal-score">88<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">练琴 + 认真上课，冲 90！</div>
+      </div>
+
+      <div class="goal-card ok">
+        <div class="goal-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+        <div class="goal-name">品格培养</div>
+        <div class="goal-score">93<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">小榜样！继续保持！</div>
+      </div>
+
+      <div class="goal-card ok">
+        <div class="goal-status ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></div>
+        <div class="goal-name">公民教育</div>
+        <div class="goal-score">93<small>/100</small></div>
+        <div class="goal-att">态度 A</div>
+        <div class="goal-note">好少年！继续做负责任的战士。</div>
+      </div>
+
+      <div class="goal-card warn">
+        <div class="goal-status warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 18L18 6M6 6l12 12"/></svg></div>
+        <div class="goal-name">全球视野</div>
+        <div class="goal-score">89<small>/100</small></div>
+        <div class="goal-att">态度 B</div>
+        <div class="goal-note">差 1 分！多看新闻多发言！</div>
+      </div>
+
+    </div>
+    <div class="goal-sum">
+      <span class="goal-sum-chip g">达标 <b>5</b></span>
+      <span class="goal-sum-chip y">冲刺中 <b>7</b></span>
+      <span class="goal-sum-chip r">要加油 <b>0</b></span>
+    </div>
+    <p class="panel-note" style="text-align:center; margin-top:10px;">每点亮一盏绿灯，就离满级更近一步。你可以的，AL！</p>
+  </section>
+
+  <!-- ===== 5. 我的成长曲线 ===== -->
+  <section class="panel">
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><polyline points="3,17 9,11 13,15 21,7"/></svg>
+      我的成长曲线
+    </h2>
+    <p class="panel-note" style="text-align:center;">九个节点：从 P1 一年级到 P3 三年级，六条能力线一路向上。</p>
     <div id="curve-chart-primary"></div>
   </section>
 
-  <h2 class="panel-title" style="margin-top:40px; margin-bottom:4px;">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    小学战斗属性面板
-  </h2>
-  <p class="panel-sub">最新数据 · P3（三年级）Term 1 当前战斗。科目更多了，AL 的光芒也更亮了。</p>
-
-  <div class="dim-grid" id="dim-grid-primary"></div>
-
+  <!-- ===== 6. 战斗记录 ===== -->
   <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M8 12l3 3 5-6"/></svg>
-      学科修炼路线 · NEXT QUEST
+    <h2 class="panel-title center">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B9D" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+      战斗记录
     </h2>
-    <p class="panel-sub">过去的分是荣誉，不是终点。下一段冒险，才是真正的开始——每一科都有下一关等你闯。</p>
-    <div class="skill-grid">
-
-      <div class="subj-card" style="border-top-color:#FFD700;">
-        <div class="subj-head">
-          <span class="subj-name">数学</span>
-          <span class="subj-status" style="color:#FFD700; border:1px solid rgba(255,215,0,0.4);">态度告急</span>
-          <span class="subj-pct" style="color:#FFD700;">93%</span>
-        </div>
-        <div class="subj-review">93 分仍在达标线上，但态度从 A 掉到 B——三年级数学变难了，战场更需要热情。那些错题不是失败，是还没被你打败的小怪兽。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每天 10 分钟口算计时挑战，像打 BOSS 一样限时通关</li>
-            <li>准备"怪兽本"：每订正一道错题 = 击败一只怪兽，攒 10 只召唤满分</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：数学 ≥ 96% + 态度升回 A，解锁称号「数理大师」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#00E5FF;">
-        <div class="subj-head">
-          <span class="subj-name">科学</span>
-          <span class="subj-status" style="color:#00E5FF; border:1px solid rgba(0,229,255,0.4);">踩线达标</span>
-          <span class="subj-pct" style="color:#00E5FF;">90%</span>
-        </div>
-        <div class="subj-review">90 分刚好踩线，但对比二年级的 91–99 明显回落。三年级科学更深了——课本上的知识，亲手做实验才会真正属于你。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每周 1 个家庭小实验（火山喷发、种子发芽、磁铁探秘）</li>
-            <li>准备"观察记录本"，把每次实验画下来、写一句发现</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：科学 ≥ 93%，解锁装备「科学之眼」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#5B8DEF;">
-        <div class="subj-head">
-          <span class="subj-name">英语</span>
-          <span class="subj-status" style="color:#5B8DEF; border:1px solid rgba(91,141,239,0.4);">重点修炼</span>
-          <span class="subj-pct" style="color:#5B8DEF;">85%</span>
-        </div>
-        <div class="subj-review">85 分滑进警戒区——这是目前最需要追赶的科目。别怕，你从幼儿园一路都在进步，把阅读和开口捡回来，英语会回来的。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每天 20 分钟英文绘本配音朗读，跟着音频大声读</li>
-            <li>课堂上主动举手用英语回答，每周至少 5 次</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：英语 ≥ 90%，解锁称号「英语小主播」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#E86A92;">
-        <div class="subj-head">
-          <span class="subj-name">普通话</span>
-          <span class="subj-status" style="color:#E86A92; border:1px solid rgba(232,106,146,0.4);">高位守护</span>
-          <span class="subj-pct" style="color:#E86A92;">99%</span>
-        </div>
-        <div class="subj-review">99 分几乎满分，普通话是你的王牌。母语的下一关不是分数，是"讲得精彩"——让中文变得有故事、有温度、有感染力。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每天 15 分钟中文故事阅读，读给家人听</li>
-            <li>每周学讲 2 个新故事，讲完问家人"猜猜结局"</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：保持 ≥ 98% + 每周 2 个故事，解锁称号「故事大王」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#4ADE80;">
-        <div class="subj-head">
-          <span class="subj-name">印尼语</span>
-          <span class="subj-status" style="color:#4ADE80; border:1px solid rgba(74,222,128,0.4);">稳中有升</span>
-          <span class="subj-pct" style="color:#4ADE80;">96%</span>
-        </div>
-        <div class="subj-review">96 分优秀。印尼语每天都在你身边——把课堂学到的词用进生活，进步会快得超乎想象。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每天 3 句印尼语日常对话：问候、吃饭、道谢</li>
-            <li>每周看 10 分钟印尼语动画片，跟着主角复读</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：印尼语 ≥ 97%，解锁称号「双语小达人」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#FF6B35;">
-        <div class="subj-head">
-          <span class="subj-name">体育</span>
-          <span class="subj-status" style="color:#FF6B35; border:1px solid rgba(255,107,53,0.4);">双线追赶</span>
-          <span class="subj-pct" style="color:#FF6B35;">84%</span>
-        </div>
-        <div class="subj-review">84 分在警戒区、态度 B——体能是最需要拉回正轨的一角。你从小就是精力充沛的小战士，动起来，把身体练成最硬的铠甲！</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每周 3 次户外运动：跳绳、踢球、拍球各 10 分钟</li>
-            <li>每天跳绳 100 下打卡，从"气喘"练到"轻松"</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：体育 ≥ 90% + 态度升 A，解锁装备「疾风战靴」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#A78BFA;">
-        <div class="subj-head">
-          <span class="subj-name">数字素养</span>
-          <span class="subj-status" style="color:#A78BFA; border:1px solid rgba(167,139,250,0.4);">态度之坎</span>
-          <span class="subj-pct" style="color:#A78BFA;">99%</span>
-        </div>
-        <div class="subj-review">99 分接近满分级，但态度 B 是唯一的短板——认真完成每次练习，别让粗心拖后腿。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每周 1 次打字小游戏练习，10 分钟专注挑战</li>
-            <li>用绘图软件完成 1 幅作品，展示给家人</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：保持 ≥ 97% + 态度升 A，解锁称号「科技小先锋」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#FF9A3D;">
-        <div class="subj-head">
-          <span class="subj-name">艺术设计</span>
-          <span class="subj-status" style="color:#FF9A3D; border:1px solid rgba(255,154,61,0.4);">探索进阶</span>
-          <span class="subj-pct" style="color:#FF9A3D;">87%</span>
-        </div>
-        <div class="subj-review">87 分在警戒区、态度 B。画笔还在找自己的风格，多画、多观察——灵感会在纸上自己长大。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每周画 1 幅"我的一天"，把开心的事画下来</li>
-            <li>观察树叶、云朵、小动物，画成自然日记</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：艺术设计 ≥ 90% + 态度升 A，解锁称号「创意小画家」</div>
-      </div>
-
-      <div class="subj-card" style="border-top-color:#F472B6;">
-        <div class="subj-head">
-          <span class="subj-name">音乐</span>
-          <span class="subj-status" style="color:#F472B6; border:1px solid rgba(244,114,182,0.4);">优雅进阶</span>
-          <span class="subj-pct" style="color:#F472B6;">88%</span>
-        </div>
-        <div class="subj-review">88 分在警戒区、态度 B。音乐是你表达情绪的超能力，钢琴技能和课堂音乐互相成就——继续练琴，让旋律更有力量。</div>
-        <div class="subj-path">
-          <div class="subj-path-title">增 长 路 径</div>
-          <ul>
-            <li>每周完整练习 1 首钢琴曲（配合钢琴技能升级）</li>
-            <li>和家人一起合唱，录下来听自己的进步</li>
-          </ul>
-        </div>
-        <div class="subj-goal">激励目标：音乐 ≥ 90% + 态度升 A，解锁称号「音乐小精灵」</div>
-      </div>
-
-    </div>
+    <p class="panel-note" style="text-align:center;">幼儿园 7 场 + 小学 9 场，每一场都在变强。</p>
+    <div class="timeline" id="timeline"></div>
   </section>
 
+  <!-- ===== 家长进阶区 ===== -->
+  <details class="parenthub">
+    <summary>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>
+      家长进阶区：修炼路线 · 素养 · 评语 · 说明
+    </summary>
+    <div class="hub-inner">
 
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF3838" stroke-width="2"><path d="M12 2l10 18H2z"/><path d="M12 9v5M12 17v.5"/></svg>
-      达标警示板 · STANDARD CHECK
-    </h2>
-    <p class="panel-sub">家庭标准：分数 ≥90 达标，80–89 警戒，低于 80 不达标；态度评级 A 达标，B 及以下不达标。以下对照 P3（三年级）Term 1 当前全科成绩。</p>
+      <!-- 修炼路线 -->
+      <h3 class="panel-title" style="font-size:1.2rem; margin-top:16px;">学科修炼路线 · NEXT QUEST</h3>
+      <p class="panel-note">过去的分是荣誉，不是终点。每一科都有下一关等你闯。</p>
+      <div class="subj-grid">
 
-    <div class="stand-stats">
-      <div class="stand-stat"><div class="num" style="color:#4ADE80;">5</div><div class="lbl">达标（≥90 + 态度A）</div></div>
-      <div class="stand-stat"><div class="num" style="color:#FFD700;">7</div><div class="lbl">警戒（一项或两项未达标）</div></div>
-      <div class="stand-stat"><div class="num" style="color:#FF3838;">0</div><div class="lbl">不达标（&lt;80 或 态度C以下）</div></div>
-      <div class="stand-stat"><div class="num" style="color:#00D4FF;">42%</div><div class="lbl">达标率（5/12 科）</div></div>
+        <div class="subj-card" style="border-top-color:#FFD700;">
+          <div class="subj-head">
+            <span class="subj-name">数学</span>
+            <span class="subj-status" style="color:#FFD700; border:1px solid rgba(255,215,0,0.4);">态度告急</span>
+            <span class="subj-pct" style="color:#FFD700;">93</span>
+          </div>
+          <div class="subj-review">93 分仍在达标线上，但态度从 A 掉到 B——三年级数学变难了，战场更需要热情。错题不是失败，是还没被你打败的小怪兽。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每天 10 分钟口算计时挑战，像打 BOSS 一样限时通关</li>
+              <li>准备"怪兽本"：每订正一道错题 = 击败一只怪兽，攒 10 只召唤满分</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：数学 ≥ 96 + 态度升回 A，解锁称号「数理大师」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#00E5FF;">
+          <div class="subj-head">
+            <span class="subj-name">科学</span>
+            <span class="subj-status" style="color:#00E5FF; border:1px solid rgba(0,229,255,0.4);">踩线达标</span>
+            <span class="subj-pct" style="color:#00E5FF;">90</span>
+          </div>
+          <div class="subj-review">90 分刚好踩线，但对比二年级的 91–99 明显回落。三年级科学更深了——亲手做实验，知识才会真正属于你。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每周 1 个家庭小实验（火山喷发、种子发芽、磁铁探秘）</li>
+              <li>准备"观察记录本"，把每次实验画下来、写一句发现</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：科学 ≥ 93，解锁装备「科学之眼」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#5B8DEF;">
+          <div class="subj-head">
+            <span class="subj-name">英语</span>
+            <span class="subj-status" style="color:#5B8DEF; border:1px solid rgba(91,141,239,0.4);">重点修炼</span>
+            <span class="subj-pct" style="color:#5B8DEF;">85</span>
+          </div>
+          <div class="subj-review">85 分滑进警戒区——这是目前最需要追赶的科目。别怕，你从幼儿园一路都在进步，把阅读和开口捡回来，英语会回来的。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每天 20 分钟英文绘本配音朗读，跟着音频大声读</li>
+              <li>课堂上主动举手用英语回答，每周至少 5 次</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：英语 ≥ 90，解锁称号「英语小主播」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#E86A92;">
+          <div class="subj-head">
+            <span class="subj-name">普通话</span>
+            <span class="subj-status" style="color:#E86A92; border:1px solid rgba(232,106,146,0.4);">高位守护</span>
+            <span class="subj-pct" style="color:#E86A92;">99</span>
+          </div>
+          <div class="subj-review">99 分几乎满分，普通话是你的王牌。母语的下一关不是分数，是"讲得精彩"——让中文有故事、有温度、有感染力。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每天 15 分钟中文故事阅读，读给家人听</li>
+              <li>每周学讲 2 个新故事，讲完问家人"猜猜结局"</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：保持 ≥ 98 + 每周 2 个故事，解锁称号「故事大王」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#4ADE80;">
+          <div class="subj-head">
+            <span class="subj-name">印尼语</span>
+            <span class="subj-status" style="color:#4ADE80; border:1px solid rgba(74,222,128,0.4);">稳中有升</span>
+            <span class="subj-pct" style="color:#4ADE80;">96</span>
+          </div>
+          <div class="subj-review">96 分优秀。印尼语每天都在你身边——把课堂学到的词用进生活，进步会快得超乎想象。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每天 3 句印尼语日常对话：问候、吃饭、道谢</li>
+              <li>每周看 10 分钟印尼语动画片，跟着主角复读</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：印尼语 ≥ 97，解锁称号「双语小达人」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#FF6B35;">
+          <div class="subj-head">
+            <span class="subj-name">体育</span>
+            <span class="subj-status" style="color:#FF6B35; border:1px solid rgba(255,107,53,0.4);">双线追赶</span>
+            <span class="subj-pct" style="color:#FF6B35;">84</span>
+          </div>
+          <div class="subj-review">84 分在警戒区、态度 B——体能是最需要拉回正轨的一角。你从小就是精力充沛的小战士，动起来，把身体练成最硬的铠甲！</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每周 3 次户外运动：跳绳、踢球、拍球各 10 分钟</li>
+              <li>每天跳绳 100 下打卡，从"气喘"练到"轻松"</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：体育 ≥ 90 + 态度升 A，解锁装备「疾风战靴」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#A78BFA;">
+          <div class="subj-head">
+            <span class="subj-name">数字素养</span>
+            <span class="subj-status" style="color:#A78BFA; border:1px solid rgba(167,139,250,0.4);">态度之坎</span>
+            <span class="subj-pct" style="color:#A78BFA;">99</span>
+          </div>
+          <div class="subj-review">99 分接近满分级，但态度 B 是唯一的短板——认真完成每次练习，别让粗心拖后腿。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每周 1 次打字小游戏练习，10 分钟专注挑战</li>
+              <li>用绘图软件完成 1 幅作品，展示给家人</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：保持 ≥ 97 + 态度升 A，解锁称号「科技小先锋」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#FF9A3D;">
+          <div class="subj-head">
+            <span class="subj-name">艺术设计</span>
+            <span class="subj-status" style="color:#FF9A3D; border:1px solid rgba(255,154,61,0.4);">探索进阶</span>
+            <span class="subj-pct" style="color:#FF9A3D;">87</span>
+          </div>
+          <div class="subj-review">87 分在警戒区、态度 B。画笔还在找自己的风格，多画、多观察——灵感会在纸上自己长大。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每周画 1 幅"我的一天"，把开心的事画下来</li>
+              <li>观察树叶、云朵、小动物，画成自然日记</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：艺术设计 ≥ 90 + 态度升 A，解锁称号「创意小画家」</div>
+        </div>
+
+        <div class="subj-card" style="border-top-color:#F472B6;">
+          <div class="subj-head">
+            <span class="subj-name">音乐</span>
+            <span class="subj-status" style="color:#F472B6; border:1px solid rgba(244,114,182,0.4);">优雅进阶</span>
+            <span class="subj-pct" style="color:#F472B6;">88</span>
+          </div>
+          <div class="subj-review">88 分在警戒区、态度 B。音乐是你表达情绪的超能力，钢琴技能和课堂音乐互相成就——继续练琴，让旋律更有力量。</div>
+          <div class="subj-path">
+            <div class="subj-path-title">增长路径</div>
+            <ul>
+              <li>每周完整练习 1 首钢琴曲（配合钢琴技能升级）</li>
+              <li>和家人一起合唱，录下来听自己的进步</li>
+            </ul>
+          </div>
+          <div class="subj-goal">激励目标：音乐 ≥ 90 + 态度升 A，解锁称号「音乐小精灵」</div>
+        </div>
+
+      </div>
+
+      <!-- 素养与习惯 -->
+      <h3 class="panel-title" style="font-size:1.2rem; margin-top:26px;">素养与习惯</h3>
+      <div class="hl-grid" style="margin-top:10px;">
+        <div class="hl-item">
+          <div class="hl-icon" style="border-color:#00D4FF; color:#00D4FF;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="hl-title" style="color:#00D4FF;">态度与参与度</div>
+          <div class="hl-text">P3 Term 1 各科态度评级 7A + 5B——从一年级的 8A4B 下滑，投入需要找回来。态度是成绩背后的发动机。</div>
+        </div>
+        <div class="hl-item">
+          <div class="hl-icon" style="border-color:#A78BFA; color:#A78BFA;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div class="hl-title" style="color:#A78BFA;">四大素养</div>
+          <div class="hl-text">精神品格、终身学习、协作沟通、批判性思维——12 项观察最近一次（P2 学年末）全部 Always 最高档，底色扎实。</div>
+        </div>
+        <div class="hl-item">
+          <div class="hl-icon" style="border-color:#4ADE80; color:#4ADE80;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+          <div class="hl-title" style="color:#4ADE80;">出勤记录</div>
+          <div class="hl-text">P3 Term 1 全勤（0 缺勤 0 迟到）；P2 各学期缺勤仅 0–1 天，习惯稳定。身体是战斗的本钱。</div>
+        </div>
+      </div>
+
+      <!-- 老师的话 -->
+      <h3 class="panel-title" style="font-size:1.2rem; margin-top:26px;">老师的话 · 班主任评语</h3>
+      <p class="comment-en">"AL demonstrates a solid understanding of his studies and has shown initiative by completing additional work at home. He enjoys social interactions and communicates confidently with both adults and his peers, often contributing to class discussions. His results this semester reflect his positive attitude toward learning, and I look forward to his continued progress in the next academic year."</p>
+      <p class="comment-zh">（P2 二年级 · 学年末）—— AL 展现了扎实的学习理解力，还会主动在家完成额外学习。他乐于与人交往，面对大人和同伴都自信大方，经常参与课堂讨论。本学期的成绩反映了他积极的学习态度，期待他在下一学年继续进步。</p>
+
+      <!-- 评分说明 -->
+      <h3 class="panel-title" style="font-size:1.2rem; margin-top:26px;">评分说明</h3>
+      <p class="hub-note">
+        • 全部采用 100 分制，与成绩单百分比一致。<br>
+        • 六边形六角：数学逻辑 = 数学×70% + 科学×30%；语言表达 = 英语×40% + 普通话×35% + 印尼语×25%；艺术审美 =（艺术设计+音乐）/2；体能 = 体育；社交协作 = 品格×40% + 公民×30% + 全球视野×30%；学习专注 = 态度评级×70% + 数字素养×30%。<br>
+        • 六边形战力 = 六角平均分（满分 100）。综合战斗力 = 六边形战力×80% + 技能战力×20%。<br>
+        • 技能战力：每项技能每 2 级 = 20 分，10 级 = 100 分；当前足球 60、钢琴 40、篮球 40，平均 46.7。<br>
+        • 家庭标准：分数 ≥ 90 达标、80–89 冲刺（警戒）、低于 80 要加油（不达标）；态度 A 达标，B 及以下要加油。<br>
+        • 年级口径：Grade 1 = P1 = 一年级；Grade 2 = P2 = 二年级；Grade 3 = P3 = 三年级；一个学年按 Term 与 Semester 记录成长。
+      </p>
+
     </div>
-
-    <div class="stand-grid">
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">数学</span><span class="stand-att">93%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数达标，态度掉到 B。认真对待每道题，把 A 找回来。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#4ADE80;">
-        <div class="stand-head">
-          <span class="stand-name">科学</span><span class="stand-att">90%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
-        </div>
-        <div class="stand-note ok">踩线达标。别满足，动手做实验，守住阵地。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">英语</span><span class="stand-att">85%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数在警戒区。每天 20 分钟绘本朗读，把英语拉回 90+。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#4ADE80;">
-        <div class="stand-head">
-          <span class="stand-name">普通话</span><span class="stand-att">99%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
-        </div>
-        <div class="stand-note ok">母语王牌，保持高位。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#4ADE80;">
-        <div class="stand-head">
-          <span class="stand-name">印尼语</span><span class="stand-att">96%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
-        </div>
-        <div class="stand-note ok">优秀，继续把印尼语用进生活。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FF3838;">
-        <div class="stand-head">
-          <span class="stand-name">体育</span><span class="stand-att">84%</span>
-          <span class="stand-pct" style="color:#FF3838;">B</span>
-          <span class="stand-badge" style="background:rgba(255,56,56,0.15); color:#FF3838;">最需警惕</span>
-        </div>
-        <div class="stand-note">最接近红线的一科：分数警戒 + 态度 B。每周 3 次运动 + 认真参与，双线追上。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">数字素养</span><span class="stand-att">99%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数满分级，态度 B 是唯一短板。认真完成每次练习，升 A 不难。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">艺术设计</span><span class="stand-att">87%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数、态度双警戒。每周多画 1 幅，态度跟上。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">音乐</span><span class="stand-att">88%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">分数、态度双警戒。认真参与音乐课，继续练琴。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#4ADE80;">
-        <div class="stand-head">
-          <span class="stand-name">品格培养</span><span class="stand-att">93%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
-        </div>
-        <div class="stand-note ok">榜样级表现，继续保持。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#4ADE80;">
-        <div class="stand-head">
-          <span class="stand-name">公民教育</span><span class="stand-att">93%</span>
-          <span class="stand-pct" style="color:#4ADE80;">A</span>
-          <span class="stand-badge" style="background:rgba(74,222,128,0.15); color:#4ADE80;">达标</span>
-        </div>
-        <div class="stand-note ok">公民素养稳固，继续做负责任的少年。</div>
-      </div>
-
-      <div class="stand-card" style="border-left-color:#FFD700;">
-        <div class="stand-head">
-          <span class="stand-name">全球视野</span><span class="stand-att">89%</span>
-          <span class="stand-pct" style="color:#FFD700;">B</span>
-          <span class="stand-badge" style="background:rgba(255,215,0,0.15); color:#FFD700;">警戒</span>
-        </div>
-        <div class="stand-note">差 1 分 + 态度 B。关注时事、积极发言，跨过 90 线。</div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
-      素养与习惯 · 新数据考量
-    </h2>
-    <p class="panel-sub">除了科目分数，报告还考察态度、素养与出勤——这些才是成长真正的底色。</p>
-    <div class="hl-grid" style="margin-top:6px;">
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#00D4FF;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="hl-title" style="color:#00D4FF;">态度与参与度</div>
-        <div class="hl-text">P3 Term 1 各科态度评级 7A + 5B——从一年级的 8A4B 下滑，投入需要找回来。态度是成绩背后的发动机。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#A78BFA;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="hl-title" style="color:#A78BFA;">四大素养全满分</div>
-        <div class="hl-text">精神品格、终身学习、协作沟通、批判性思维——12 项观察最近一次（P2 学年末）全部 Always 最高档，成长的底色依然扎实。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#4ADE80;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4ADE80" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
-        <div class="hl-title" style="color:#4ADE80;">出勤记录</div>
-        <div class="hl-text">P3 Term 1 全勤（0缺勤0迟到）；P2 各学期缺勤仅 0–1 天，习惯稳定。身体是战斗的本钱。</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2 class="panel-title">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
-      老师的话 · 班主任评语
-    </h2>
-    <p class="panel-sub" style="font-size:0.95rem; line-height:1.9; color:#B8C8E0;">"AL demonstrates a solid understanding of his studies and has shown initiative by completing additional work at home. He enjoys social interactions and communicates confidently with both adults and his peers, often contributing to class discussions. His results this semester reflect his positive attitude toward learning, and I look forward to his continued progress in the next academic year."</p>
-    <p class="panel-sub" style="color:var(--gold);">（P2 二年级 · 学年末）—— AL 展现了扎实的学习理解力，还会主动在家完成额外学习。他乐于与人交往，面对大人和同伴都自信大方，经常参与课堂讨论。本学期的成绩反映了他积极的学习态度，期待他在下一学年继续进步。</p>
-  </section>
-  <!-- ===== Highlights ===== -->
-  <section class="panel">
-    <h2 class="panel-title" style="justify-content:center;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
-      觉醒技能
-    </h2>
-    <p class="panel-sub" style="text-align:center;">AL 最拿手的三个超能力。</p>
-    <div class="hl-grid">
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#FFD700;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#FFD700" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="12" y1="11" x2="14" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="12" y1="15" x2="14" y2="15"/></svg></div>
-        <div class="hl-title" style="color:#FFD700;">数学之眼</div>
-        <div class="hl-text">从第一战起就是满能量。数数、图形、规律，一眼看穿。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#A78BFA;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#A78BFA" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.5.3 6 1.8 6 5.5"/></svg></div>
-        <div class="hl-title" style="color:#A78BFA;">助人之心</div>
-        <div class="hl-text">天生的队长体质，总是主动帮同学，老师叫他"最佳小帮手"。</div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-icon" style="border-color:#4ADE80;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4ADE80" stroke-width="2"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"/></svg></div>
-        <div class="hl-title" style="color:#4ADE80;">逆袭之光</div>
-        <div class="hl-text">社交能量从 3.3 升到 7.5，低谷后反弹，学会了控制力量和等待。</div>
-      </div>
-    </div>
-  </section>
+  </details>
 
 </div>
 
@@ -1087,7 +738,7 @@
 </footer>
 
 <script>
-// ===== 数据（10分制）=====
+// ===== 数据（100 分制）=====
 const dims = [
   { name: '数学逻辑', color: '#FFD700', icon: 'math' },
   { name: '语言表达', color: '#00D4FF', icon: 'lang' },
@@ -1096,176 +747,123 @@ const dims = [
   { name: '社交协作', color: '#A78BFA', icon: 'social' },
   { name: '学习专注', color: '#FF6B35', icon: 'focus' },
 ];
-
-const terms = [
-  { label: '第1期', time: '2023春', title: '新手觉醒', data: [10.0, 7.9, 9.4, 7.5, 4.2, 6.9] },
-  { label: '第2期', time: '2023夏', title: '初露锋芒', data: [9.5, 8.9, 10.0, 9.2, 5.8, 8.8] },
-  { label: '第3期', time: '2023秋', title: '全能战士', data: [10.0, 9.2, 8.8, 9.2, 5.8, 8.1] },
-  { label: '第4期', time: '2024春', title: '试炼低谷', data: [10.0, 9.1, 8.1, 7.5, 3.3, 6.9] },
-  { label: '第5期', time: '2024夏', title: '重整旗鼓', data: [10.0, 9.1, 9.4, 8.3, 5.8, 8.1] },
-  { label: '第6期', time: '2024秋', title: '突破极限', data: [10.0, 9.3, 9.4, 9.2, 7.5, 8.1] },
-  { label: '第7期', time: '2024冬', title: '光之英雄', data: [10.0, 9.2, 10.0, 8.3, 7.5, 8.8] },
-];
-
-const dimStories = [
-  { story: '从第一战起就是满能量。数数、排序、图形规律、基础运算全部稳稳拿下。老师说他"能回答课堂上大部分问题"。', badge: '满能量角', trend: '10.0 — 9.5，从未掉下来' },
-  { story: '进步最快的属性。老师反复鼓励"多在课堂上讲英语"，从 7.9 一路升到 9.2。华语听说读写一直优秀。', badge: '飞跃角', trend: '7.9 → 9.2，持续升级' },
-  { story: '画画、唱歌、独立完成作品一直表现出色。老师评价他"充满创造力"，艺术表达是释放天性的出口。', badge: '天赋角', trend: '8.1 — 10.0，稳定优秀' },
-  { story: '从 7.5 升到 9.2 再到 8.3。大动作、健康自理、跟随指令协调运动都在稳步提升，能量充沛的小战士。', badge: '力量角', trend: '7.5 → 9.2，明显成长' },
-  { story: '波动最大的属性。从不小心碰到同学，到学会控制力量；从需要提醒，到成为班级小队长。正在学习温柔地战斗。', badge: '逆袭角', trend: '3.3 → 7.5，低谷后反弹' },
-  { story: '正在修炼的属性。老师说他"需要在对的时间专注对的事"，做作业有点粗心。但一直在从 6.9 升到 8.8。', badge: '修炼角', trend: '6.9 → 8.8，稳步前进' },
-];
-
-const timelineStories = [
-  '刚入战场的适应期。数学已经满能量，精力充沛，有时力量控制不好会碰到队友。',
-  '快速升级！出勤几乎全勤，体能和学习习惯大涨，开始学会控制自己的能量。',
-  '全面开花。英语表达大涨，老师说运动技能进步很大，已经学会控制精力了。',
-  '进入新战场的试炼期。社交能量跌到最低，但这是变强前的必经之路。',
-  '调整与回升。社交和专注开始回暖，英语满能量，正在找回节奏。',
-  '突破时刻！社交回到 7.5，学会了"轮到自己才大声"，专注也在改善。',
-  '收获之战。六个属性全面向好，艺术回到满能量，AL 越来越强了。',
-];
-
-// ===== 小学数据（一年级 2024-25）=====
-const primaryTerms = [
-  { grade: 'P1', label: 'Term 1', time: '2024-25', title: '第一学期', data: [9.6, 9.7, 8.8, 8.5, 9.2, 8.9] },
-  { grade: 'P1', label: 'Sem 1', time: '2024-25', title: '期中总评', data: [9.6, 9.4, 9.0, 8.6, 9.0, 9.3] },
-  { grade: 'P1', label: 'Term 3', time: '2024-25', title: '第三学期', data: [9.9, 9.5, 8.9, 8.1, 9.4, 9.3] },
-  { grade: 'P1', label: 'Sem 2', time: '2024-25', title: '学年末', data: [9.8, 9.5, 8.8, 8.2, 9.5, 9.3] },
-  { grade: 'P2', label: 'Term 1', time: '2025-26', title: '第一学期', data: [9.5, 9.7, 9.5, 9.2, 9.0, 9.4] },
-  { grade: 'P2', label: 'Sem 1', time: '2025-26', title: '期中总评', data: [9.3, 9.6, 9.4, 9.1, 9.0, 9.8] },
-  { grade: 'P2', label: 'Term 3', time: '2025-26', title: '第三学期', data: [9.3, 9.8, 9.4, 8.5, 9.1, 9.7] },
-  { grade: 'P2', label: 'Sem 2', time: '2025-26', title: '学年末', data: [9.6, 9.8, 9.3, 8.6, 9.1, 9.8] },
-  { grade: 'P3', label: 'Term 1', time: '2026-27', title: '当前战斗', data: [9.2, 9.3, 8.8, 8.4, 9.2, 9.4] },
-];
-
-const primaryStories = [
-  { story: '数学93%×70% + 科学90%×30%——数理角从一年级 9.9 回落到 9.2，三年级知识变深，正是重新修炼的好时机。', badge: '王牌角', trend: 'P1 9.6 → P3 9.2，数理回落需追赶' },
-  { story: '英语85%×40% + 普通话99%×35% + 印尼语96%×25%——普通话、印尼语稳住高位，英语 85 需要拉回 90+。', badge: '多语角', trend: 'P1 9.7 → P3 9.3，英语回落' },
-  { story: '艺术设计87% + 音乐88% 平均——三年级课程加深，艺术角平稳，向 90 冲刺。', badge: '优雅角', trend: 'P1 8.8 → P3 8.8，平稳待升' },
-  { story: '体育84%——依然是修炼角。精力充沛的小战士，把运动变成每天的快乐任务。', badge: '修炼角', trend: 'P1 8.5 → P3 8.4，稳步追赶' },
-  { story: '品格93%×40% + 公民93%×30% + 全球视野89%×30%——素养依旧稳固，班里的榜样。', badge: '榜样角', trend: 'P1 9.2 → P3 9.2，稳固' },
-  { story: '态度与参与度(7A5B)×70% + 数字素养99%×30%——数字素养满分级，态度需从 B 找回 A。', badge: '新星角', trend: 'P1 8.9 → P3 9.4，数字素养满分级' },
-];
-
-const primaryTimelineStories = [
-  '一年级第一学期。科学和普通话满分，全勤（0缺0迟），全新科目大展身手。',
-  '一年级期中总评。老师盛赞"潜力巨大"，四大素养满分；缺勤7天仍保持高分。',
-  '一年级第三学期。科学连续满分、数学98%、英语96%、普通话98%，再度全勤；体育81成为修炼方向。',
-  '一年级学年末。英语93、数学97、普通话99、视野94，态度整体回升；缺勤3天。',
-  '二年级第一学期。音乐满分100、普通话100、品格99；体育92大幅进步；缺勤1天。',
-  '二年级期中总评。12科态度全部A！品格95、普通话99；老师赞"高阶思维能力很强"。',
-  '二年级第三学期。英语98、数学97、普通话100；科学85、视野81回落，成为新修炼点。',
-  '二年级学年末。普通话连续100，数学98、英语97；老师赞"主动完成额外作业"。',
-  '三年级第一学期（当前）。普通话99、数字素养99；数学93但态度B，英语85需要重点追赶。',
-];
-
 const icons = {
-  math: '<svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="12" y1="11" x2="14" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="12" y1="15" x2="14" y2="15"/><line x1="16" y1="15" x2="16" y2="15"/></svg>',
-  lang: '<svg viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M4 5h7M7.5 5c0 5-2 9-4 11M6 9c0 3 2 6 5 7M13 19l4-10 4 10M14.5 15h5"/></svg>',
-  art: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF6B9D" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="10" r="1" fill="#FF6B9D"/><circle cx="12" cy="7.5" r="1" fill="#FF6B9D"/><circle cx="15.5" cy="10" r="1" fill="#FF6B9D"/><path d="M8 15c1.5 1.5 6.5 1.5 8 0"/></svg>',
-  phys: '<svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v6M8 11l4-2 4 2M9 21l3-7 3 7"/></svg>',
-  social: '<svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.5.3 6 1.8 6 5.5"/></svg>',
-  focus: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>',
+  math: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h6v6M4 4l6 6M20 4l-6 6M14 4h6v6M20 20h-6v-6M14 14h6v6M4 20h6v-6M4 14h6v6"/></svg>',
+  lang: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16v10H8l-4 4z"/><path d="M8 10h8M8 13h5"/></svg>',
+  art: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19l7-7a3 3 0 00-4-4l-7 7v4z"/><circle cx="9" cy="9" r="1.5"/><path d="M4 4l2 2"/></svg>',
+  phys: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>',
+  social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.5.3 6 1.8 6 5.5"/></svg>',
+  focus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5"/></svg>',
 };
 
-// ===== 维度卡片 =====
-const dimGrid = document.getElementById('dim-grid');
-const latest = terms[terms.length - 1].data;
-dims.forEach((d, i) => {
-  const s = dimStories[i];
-  const card = document.createElement('div');
-  card.className = 'dim-card';
-  card.style.borderLeftColor = d.color;
-  card.innerHTML = `
-    <div class="dim-head">
-      <div class="dim-icon" style="border-color:${d.color}; background:${d.color}15;">${icons[d.icon]}</div>
-      <div class="dim-name">${d.name}</div>
-      <div class="dim-score" style="color:${d.color}">${latest[i].toFixed(1)}</div>
-    </div>
-    <div class="dim-bar"><div class="dim-bar-fill" style="width:${latest[i]*10}%; background:${d.color}; box-shadow:0 0 8px ${d.color};"></div></div>
-    <div class="dim-trend">${s.trend}</div>
-    <div class="dim-story">${s.story}</div>
-    <span class="dim-badge" style="border-color:${d.color}; color:${d.color};">${s.badge}</span>
-  `;
-  dimGrid.appendChild(card);
-});
+// 全部战斗节点：幼儿园 K 7 期 + 小学 P1/P2/P3 9 节点
+const allTerms = [
+  { grade: 'K',  label: '第1期', title: '新手觉醒', time: '2023春', data: [100, 79, 94, 75, 42, 69] },
+  { grade: 'K',  label: '第2期', title: '初露锋芒', time: '2023夏', data: [95, 89, 100, 92, 58, 88] },
+  { grade: 'K',  label: '第3期', title: '全能战士', time: '2023秋', data: [100, 92, 88, 92, 58, 81] },
+  { grade: 'K',  label: '第4期', title: '试炼低谷', time: '2024春', data: [100, 91, 81, 75, 33, 69] },
+  { grade: 'K',  label: '第5期', title: '重整旗鼓', time: '2024夏', data: [100, 91, 94, 83, 58, 81] },
+  { grade: 'K',  label: '第6期', title: '突破极限', time: '2024秋', data: [100, 93, 94, 92, 75, 81] },
+  { grade: 'K',  label: '第7期', title: '光之英雄', time: '2024冬', data: [100, 92, 100, 83, 75, 88] },
+  { grade: 'P1', label: 'Term 1', title: '第一学期', time: '2024-25', data: [96, 97, 88, 85, 92, 89] },
+  { grade: 'P1', label: 'Sem 1', title: '期中总评', time: '2024-25', data: [96, 94, 90, 86, 90, 93] },
+  { grade: 'P1', label: 'Term 3', title: '第三学期', time: '2024-25', data: [99, 95, 89, 81, 94, 93] },
+  { grade: 'P1', label: 'Sem 2', title: '学年末', time: '2024-25', data: [98, 95, 88, 82, 95, 93] },
+  { grade: 'P2', label: 'Term 1', title: '第一学期', time: '2025-26', data: [95, 97, 95, 92, 90, 94] },
+  { grade: 'P2', label: 'Sem 1', title: '期中总评', time: '2025-26', data: [93, 96, 94, 91, 90, 98] },
+  { grade: 'P2', label: 'Term 3', title: '第三学期', time: '2025-26', data: [93, 98, 94, 85, 91, 97] },
+  { grade: 'P2', label: 'Sem 2', title: '学年末', time: '2025-26', data: [96, 98, 93, 86, 91, 98] },
+  { grade: 'P3', label: 'Term 1', title: '当前战斗', time: '2026-27', data: [92, 93, 88, 84, 92, 94] },
+];
+const gradeNames = { K: '幼儿园', P1: '一年级', P2: '二年级', P3: '三年级' };
+const gradeOrder = ['K', 'P1', 'P2', 'P3'];
 
-// ===== 时间线 =====
-const tl = document.getElementById('timeline');
-const dotColors = ['#FFD700','#00D4FF','#FF6B9D','#4ADE80','#A78BFA','#FF6B35','#FF3838'];
-terms.forEach((t, i) => {
-  const item = document.createElement('div');
-  item.className = 'tl-item';
-  item.innerHTML = `
-    <div class="tl-dot" style="background:${dotColors[i]}; color:${dotColors[i]}; left:-31px"></div>
-    <div class="tl-term">${t.label}<span class="tl-title">${t.title}</span><span class="tl-time">${t.time}</span></div>
-    <div class="tl-desc">${timelineStories[i]}</div>
-  `;
-  tl.appendChild(item);
-});
+// 六维卡文案（P3 当前，孩子向短句）
+const dimNotes = [
+  '数学 93 + 科学 90。差 8 分满级，错题怪兽等你打败！',
+  '英语 85 要加油，普通话 99 超强！三语一起亮！',
+  '艺术 87 + 音乐 88。多画多唱，冲 90！',
+  '体育 84。动起来，每周 3 次运动！',
+  '品格 93 + 公民 93。班里的小榜样！',
+  '数字素养 99 超棒，态度 7A5B 要回升！',
+];
 
-// 追加小学时间线节点
-const primaryDotColors = ['#FFD700','#00D4FF','#FF6B9D','#4ADE80','#FFB347','#A78BFA','#FF6B35','#00E5FF','#FF3838'];
-primaryTerms.forEach((t, i) => {
-  const item = document.createElement('div');
-  item.className = 'tl-item';
-  item.innerHTML = `
-    <div class="tl-dot" style="background:${primaryDotColors[i]}; color:${primaryDotColors[i]}; left:-31px"></div>
-    <div class="tl-term"><span style="color:var(--gold);">小学 ${t.grade}</span> ${t.label}<span class="tl-title">${t.title}</span><span class="tl-time">${t.time}</span></div>
-    <div class="tl-desc">${primaryTimelineStories[i]}</div>
-  `;
-  tl.appendChild(item);
-});
+// 时间线文案（一句一关）
+const timelineStories = [
+  '数字满分，学会控制力量',
+  '英语大涨，几乎全勤',
+  '全面开花，运动进步',
+  '社交低谷，变强前夜',
+  '社交回暖，找回节奏',
+  '突破极限，社交 75',
+  '六维向好，光之英雄',
+  '科学普通话满分，全勤',
+  '老师赞潜力巨大',
+  '三科 98+，体育修炼',
+  '态度回升，视野 94',
+  '音乐普通话双 100',
+  '12 科态度全 A',
+  '英语 98，科学回落',
+  '主动完成额外作业',
+  '普通话数字素养 99，英语追赶',
+];
+const tlColors = [
+  '#00D4FF','#00D4FF','#00D4FF','#00D4FF','#00D4FF','#00D4FF','#00D4FF',
+  '#FFD700','#FFD700','#FFD700','#FFD700',
+  '#A78BFA','#A78BFA','#A78BFA','#A78BFA',
+  '#FF3838',
+];
 
-// ===== 小学雷达图 =====
-const radarChartPrimary = echarts.init(document.getElementById('radar-chart-primary'));
-const navPrimary = document.getElementById('term-nav-primary');
-const gradeTabsPrimary = document.getElementById('grade-tabs-primary');
-const primaryGrades = ['P1', 'P2', 'P3'];
-const primaryGradeNames = { P1: '一年级', P2: '二年级', P3: '三年级' };
-let primaryGrade = 'P3';
-let primaryIdx = 0;
+// ===== 我的六边形雷达 =====
+const radar = echarts.init(document.getElementById('radar-chart-primary'));
+const gradeTabsEl = document.getElementById('grade-tabs-primary');
+const termNavEl = document.getElementById('term-nav-primary');
+let curGrade = 'P3';
+let curIdx = 0;
 
-function termsOfGrade(g) { return primaryTerms.filter(t => t.grade === g); }
+function termsOf(g) { return allTerms.filter(t => t.grade === g); }
 
-function renderGradeTabsPrimary() {
-  gradeTabsPrimary.innerHTML = '';
-  primaryGrades.forEach(g => {
+function renderGradeTabs() {
+  gradeTabsEl.innerHTML = '';
+  gradeOrder.forEach(g => {
     const btn = document.createElement('button');
-    btn.className = 'grade-btn' + (g === primaryGrade ? ' active' : '');
-    btn.innerHTML = `${g}<span class="time">${primaryGradeNames[g]}</span>`;
-    btn.onclick = () => { primaryGrade = g; primaryIdx = 0; renderGradeTabsPrimary(); renderNavPrimary(); renderRadarPrimary(); };
-    gradeTabsPrimary.appendChild(btn);
+    btn.className = 'grade-btn' + (g === curGrade ? ' active' : '');
+    btn.innerHTML = `${g === 'K' ? 'K' : g}<span class="time">${gradeNames[g]}</span>`;
+    btn.onclick = () => { curGrade = g; curIdx = 0; renderGradeTabs(); renderTermNav(); renderRadar(); };
+    gradeTabsEl.appendChild(btn);
   });
 }
 
-function renderNavPrimary() {
-  navPrimary.innerHTML = '';
-  termsOfGrade(primaryGrade).forEach((t, i) => {
+function renderTermNav() {
+  termNavEl.innerHTML = '';
+  termsOf(curGrade).forEach((t, i) => {
     const btn = document.createElement('button');
-    btn.className = 'term-btn' + (i === primaryIdx ? ' active' : '');
+    btn.className = 'term-btn' + (i === curIdx ? ' active' : '');
     btn.innerHTML = `${t.label}<span class="time">${t.title}</span>`;
-    btn.onclick = () => { primaryIdx = i; renderNavPrimary(); renderRadarPrimary(); };
-    navPrimary.appendChild(btn);
+    btn.onclick = () => { curIdx = i; renderTermNav(); renderRadar(); };
+    termNavEl.appendChild(btn);
   });
 }
 
-function renderRadarPrimary() {
-  const t = termsOfGrade(primaryGrade)[primaryIdx];
-  radarChartPrimary.setOption({
+function avg(a) { return a.reduce((x, y) => x + y, 0) / a.length; }
+
+function renderRadar() {
+  const list = termsOf(curGrade);
+  const t = list[curIdx];
+  const start = list[0];
+  radar.setOption({
     tooltip: { trigger: 'item' },
     legend: {
-      data: ['起点（P1 Term 1）', '当前（' + t.grade + ' ' + t.label + '·' + t.title + '）'],
+      data: ['起点（' + start.label + '）', '当前（' + t.label + '·' + t.title + '）'],
       bottom: 0,
       textStyle: { fontSize: 12, color: '#7A90B0' },
     },
     radar: {
-      indicator: dims.map(d => ({ name: d.name, max: 10 })),
+      indicator: dims.map(d => ({ name: d.name, max: 100 })),
       shape: 'polygon',
       splitNumber: 5,
       center: ['50%', '52%'],
-      radius: '65%',
+      radius: '62%',
       axisName: { color: '#E8F0FF', fontSize: 13, fontWeight: 700 },
       splitArea: {
         areaStyle: {
@@ -1279,8 +877,8 @@ function renderRadarPrimary() {
       type: 'radar',
       data: [
         {
-          value: primaryTerms[0].data,
-          name: '起点（P1 Term 1）',
+          value: start.data,
+          name: '起点（' + start.label + '）',
           lineStyle: { color: '#7A90B0', width: 2, type: 'dashed' },
           areaStyle: { color: 'rgba(122,144,176,0.1)' },
           itemStyle: { color: '#7A90B0' },
@@ -1297,132 +895,32 @@ function renderRadarPrimary() {
       ],
     }],
   }, true);
-  document.getElementById('radar-total-primary').innerHTML = t.grade + ' ' + t.label + ' 六维总分 <b>' + t.data.reduce((a, b) => a + b, 0).toFixed(1) + '</b> / 60';
+  document.getElementById('radar-total-primary').innerHTML =
+    avg(t.data).toFixed(1) + '<small>/100</small>';
 }
 
-// ===== 小学成长曲线 =====
-const curveChartPrimary = echarts.init(document.getElementById('curve-chart-primary'));
-curveChartPrimary.setOption({
-  tooltip: { trigger: 'axis' },
-  legend: {
-    data: dims.map(d => d.name),
-    bottom: 0,
-    textStyle: { color: '#7A90B0', fontSize: 12 },
-  },
-  grid: { left: 40, right: 20, top: 20, bottom: 60 },
-  xAxis: {
-    type: 'category',
-    data: primaryTerms.map(t => t.grade + '·' + t.label),
-    axisLine: { lineStyle: { color: 'rgba(255,215,0,0.3)' } },
-    axisLabel: { color: '#7A90B0' },
-  },
-  yAxis: {
-    type: 'value',
-    min: 0,
-    max: 10,
-    splitLine: { lineStyle: { color: 'rgba(255,215,0,0.1)' } },
-    axisLabel: { color: '#7A90B0' },
-  },
-  series: dims.map((d, i) => ({
-    name: d.name,
-    type: 'line',
-    smooth: true,
-    data: primaryTerms.map(t => t.data[i]),
-    lineStyle: { color: d.color, width: 2.5 },
-    itemStyle: { color: d.color },
-    symbolSize: 7,
-  })),
-});
-
-// ===== 小学维度卡片 =====
-const dimGridPrimary = document.getElementById('dim-grid-primary');
-const latestPrimary = primaryTerms[primaryTerms.length - 1].data;
+// ===== 六大能力卡 =====
+const dimGrid = document.getElementById('dim-grid-primary');
+const latest = allTerms[allTerms.length - 1].data;
 dims.forEach((d, i) => {
-  const s = primaryStories[i];
   const card = document.createElement('div');
   card.className = 'dim-card';
-  card.style.borderLeftColor = d.color;
+  card.style.borderTop = '3px solid ' + d.color;
   card.innerHTML = `
     <div class="dim-head">
-      <div class="dim-icon" style="border-color:${d.color}; background:${d.color}15;">${icons[d.icon]}</div>
+      <div class="dim-icon" style="border-color:${d.color}; color:${d.color}; background:${d.color}15;">${icons[d.icon]}</div>
       <div class="dim-name">${d.name}</div>
-      <div class="dim-score" style="color:${d.color}">${latestPrimary[i].toFixed(1)}</div>
+      <div class="dim-score">${latest[i]}<small>/100</small></div>
     </div>
-    <div class="dim-bar"><div class="dim-bar-fill" style="width:${latestPrimary[i]*10}%; background:${d.color}; box-shadow:0 0 8px ${d.color};"></div></div>
-    <div class="dim-trend">${s.trend}</div>
-    <div class="dim-story">${s.story}</div>
-    <span class="dim-badge" style="border-color:${d.color}; color:${d.color};">${s.badge}</span>
+    <div class="dim-bar"><div class="dim-bar-fill" style="width:${latest[i]}%; background:${d.color}; box-shadow:0 0 8px ${d.color};"></div></div>
+    <div class="dim-note">${dimNotes[i]}</div>
   `;
-  dimGridPrimary.appendChild(card);
+  dimGrid.appendChild(card);
 });
 
-// ===== 雷达图 =====
-const radarChart = echarts.init(document.getElementById('radar-chart'));
-const nav = document.getElementById('term-nav');
-let currentIdx = terms.length - 1;
-
-function renderNav() {
-  nav.innerHTML = '';
-  terms.forEach((t, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'term-btn' + (i === currentIdx ? ' active' : '');
-    btn.innerHTML = `${t.label}<span class="time">${t.title}</span>`;
-    btn.onclick = () => { currentIdx = i; renderNav(); renderRadar(); };
-    nav.appendChild(btn);
-  });
-}
-
-function renderRadar() {
-  const t = terms[currentIdx];
-  radarChart.setOption({
-    tooltip: { trigger: 'item' },
-    legend: {
-      data: ['起点（第1期）', '当前（' + t.label + '·' + t.title + '）'],
-      bottom: 0,
-      textStyle: { fontSize: 12, color: '#7A90B0' },
-    },
-    radar: {
-      indicator: dims.map(d => ({ name: d.name, max: 10 })),
-      shape: 'polygon',
-      splitNumber: 5,
-      center: ['50%', '52%'],
-      radius: '65%',
-      axisName: { color: '#E8F0FF', fontSize: 13, fontWeight: 700 },
-      splitArea: {
-        areaStyle: {
-          color: ['rgba(0,212,255,0.02)', 'rgba(0,212,255,0.04)', 'rgba(0,212,255,0.06)', 'rgba(0,212,255,0.08)', 'rgba(0,212,255,0.1)'],
-        },
-      },
-      splitLine: { lineStyle: { color: 'rgba(0,212,255,0.2)' } },
-      axisLine: { lineStyle: { color: 'rgba(0,212,255,0.3)' } },
-    },
-    series: [{
-      type: 'radar',
-      data: [
-        {
-          value: terms[0].data,
-          name: '起点（第1期）',
-          lineStyle: { color: '#7A90B0', width: 2, type: 'dashed' },
-          areaStyle: { color: 'rgba(122,144,176,0.1)' },
-          itemStyle: { color: '#7A90B0' },
-          symbolSize: 5,
-        },
-        {
-          value: t.data,
-          name: '当前（' + t.label + '·' + t.title + '）',
-          lineStyle: { color: '#00D4FF', width: 3, shadowBlur: 10, shadowColor: 'rgba(0,212,255,0.5)' },
-          areaStyle: { color: 'rgba(0,212,255,0.2)' },
-          itemStyle: { color: '#00D4FF' },
-          symbolSize: 7,
-        },
-      ],
-    }],
-  }, true);
-  document.getElementById('radar-total').innerHTML = '六维总分 <b>' + t.data.reduce((a, b) => a + b, 0).toFixed(1) + '</b> / 60';
-}
-
-// ===== 成长曲线 =====
-const curveChart = echarts.init(document.getElementById('curve-chart'));
+// ===== 成长曲线（小学 9 节点）=====
+const curveChart = echarts.init(document.getElementById('curve-chart-primary'));
+const primaryOnly = allTerms.filter(t => t.grade !== 'K');
 curveChart.setOption({
   tooltip: { trigger: 'axis' },
   legend: {
@@ -1430,46 +928,54 @@ curveChart.setOption({
     bottom: 0,
     textStyle: { color: '#7A90B0', fontSize: 12 },
   },
-  grid: { left: 40, right: 20, top: 20, bottom: 60 },
+  grid: { left: 46, right: 20, top: 20, bottom: 60 },
   xAxis: {
     type: 'category',
-    data: terms.map(t => t.label),
-    axisLine: { lineStyle: { color: 'rgba(0,212,255,0.3)' } },
-    axisLabel: { color: '#7A90B0' },
+    data: primaryOnly.map(t => t.grade + '·' + t.label),
+    axisLine: { lineStyle: { color: 'rgba(255,215,0,0.3)' } },
+    axisLabel: { color: '#7A90B0', interval: 0 },
   },
   yAxis: {
     type: 'value',
-    min: 0,
-    max: 10,
-    splitLine: { lineStyle: { color: 'rgba(0,212,255,0.1)' } },
+    min: 60,
+    max: 100,
+    splitLine: { lineStyle: { color: 'rgba(255,215,0,0.1)' } },
     axisLabel: { color: '#7A90B0' },
   },
   series: dims.map((d, i) => ({
     name: d.name,
     type: 'line',
     smooth: true,
-    data: terms.map(t => t.data[i]),
+    data: primaryOnly.map(t => t.data[i]),
     lineStyle: { color: d.color, width: 2.5 },
     itemStyle: { color: d.color },
     symbolSize: 7,
   })),
 });
 
-renderNav();
-renderRadar();
-renderGradeTabsPrimary();
-renderNavPrimary();
-renderRadarPrimary();
-window.addEventListener('resize', () => { radarChart.resize(); curveChart.resize(); radarChartPrimary.resize(); curveChartPrimary.resize(); });
-// 兜底：页面资源完全加载后重绘一次，确保容器尺寸就绪时图表一定渲染
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    radarChart.resize();
-    curveChart.resize();
-    radarChartPrimary.resize();
-    curveChartPrimary.resize();
-  }, 120);
+// ===== 战斗记录（16 节点时间线）=====
+const tl = document.getElementById('timeline');
+allTerms.forEach((t, i) => {
+  const row = document.createElement('div');
+  row.className = 'tl-row';
+  const isLast = i === allTerms.length - 1;
+  row.innerHTML = `
+    <div class="tl-term">${gradeNames[t.grade]} ${t.label}<span class="tl-title">${t.title} · ${t.time}</span></div>
+    <div class="tl-track">
+      <div class="tl-dot" style="background:${tlColors[i]}; color:${tlColors[i]};"></div>
+      ${isLast ? '' : '<div class="tl-line" style="background:rgba(255,255,255,0.12);"></div>'}
+    </div>
+    <div class="tl-desc">${timelineStories[i]}</div>
+  `;
+  tl.appendChild(row);
 });
+
+// ===== 启动 =====
+renderGradeTabs();
+renderTermNav();
+renderRadar();
+
+window.addEventListener('resize', () => { radar.resize(); curveChart.resize(); });
 </script>
 
 </body>
